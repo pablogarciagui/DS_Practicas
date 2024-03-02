@@ -3,11 +3,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
  */
 package ejercicio1;
-
+import java.util.ArrayList;
 /**
  *
  * @author carmenxufdz
  */
-public interface Carrera {
-    
+public abstract class Carrera {
+
 }

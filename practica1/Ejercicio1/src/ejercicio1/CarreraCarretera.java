@@ -8,6 +8,6 @@ package ejercicio1;
  *
  * @author carmenxufdz
  */
-public class CarreraCarretera {
-    
+public class CarreraCarretera extends Carrera {
+
 }

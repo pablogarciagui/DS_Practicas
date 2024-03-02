@@ -8,6 +8,6 @@ package ejercicio1;
  *
  * @author carmenxufdz
  */
-public class BicicletaMontana implements Bicicleta{
+public class BicicletaMontana extends Bicicleta{
     
 }
