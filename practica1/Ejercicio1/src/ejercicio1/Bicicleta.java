@@ -8,6 +8,6 @@ package ejercicio1;
  *
  * @author carmenxufdz
  */
-public interface Bicicleta {
+public abstract class Bicicleta {
     
 }
