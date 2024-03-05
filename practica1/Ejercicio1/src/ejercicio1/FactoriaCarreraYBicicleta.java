@@ -10,5 +10,5 @@ package ejercicio1;
  */
 public interface FactoriaCarreraYBicicleta {
     public Carrera crearCarrera();
-    public Bicicleta crearBicicleta();
+    public Bicicleta crearBicicleta(int id);
 }
