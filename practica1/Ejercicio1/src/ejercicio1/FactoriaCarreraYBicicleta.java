@@ -9,5 +9,6 @@ package ejercicio1;
  * @author carmenxufdz
  */
 public interface FactoriaCarreraYBicicleta {
-    
+    public Carrera crearCarrera();
+    public Bicicleta crearBicicleta();
 }
