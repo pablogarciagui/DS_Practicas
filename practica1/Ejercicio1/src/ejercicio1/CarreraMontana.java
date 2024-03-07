@@ -13,4 +13,20 @@ public class CarreraMontana extends Carrera{
         super();
         porcent_retirada = 0.1f;
     }
+
+    @Override
+    public void comenzarCarrera(){
+        System.out.println("!CarreraMontana esta comenzando!");
+    }
+
+    @Override
+    public void acabarCarrera(){
+        super.acabarCarrera();
+        System.out.println("¡Termina CarreraMontana!");
+    }
+    @Override
+    public void retirarBicicletasPorcentaje(){
+        super.retirarBicicletasPorcentaje();
+        System.out.println("Se retiran "+ porcent_retirada + "% de CarreraMontana");
+    }
 }
