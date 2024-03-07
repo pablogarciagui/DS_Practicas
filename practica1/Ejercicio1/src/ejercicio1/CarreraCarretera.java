@@ -9,5 +9,8 @@ package ejercicio1;
  * @author carmenxufdz
  */
 public class CarreraCarretera extends Carrera {
-
+    CarreraCarretera(){
+        super();
+        porcent_retirada = 0.2f;
+    }
 }
