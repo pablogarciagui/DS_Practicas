@@ -16,6 +16,12 @@ public abstract class Carrera implements Runnable{
     private static final int DURACION = 60;
 
     public void run(){
+        comenzarCarrera();
+        retirarBicicletasPorcentaje();
+        acabarCarrera();
+    }
+
+    Carrera() {
         num_bicicletas = 0;
         bicicletas = new ArrayList<Bicicleta>();
     }
@@ -25,22 +31,26 @@ public abstract class Carrera implements Runnable{
     }
 
     public void acabarCarrera(){
-
+        retirarBicicletasTodas();
     }
-    
+
     public void retirarBicicleta(){
 
     }
+
     public void retirarBicicletasPorcentaje(){
 
     }
 
     public void retirarBicicletasTodas(){
-
+        bicicletas.clear();
     }
 
     public void anadirBicicleta(Bicicleta bicicleta){
-
+        if (bicicleta != null) {
+            bicicletas.add(bicicleta);
+            num_bicicletas++;
+        }
     }
 
     public void setNumBicicletas(int num_bicicletas){
