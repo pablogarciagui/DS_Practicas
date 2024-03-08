@@ -8,6 +8,6 @@ import java.util.ArrayList;
  *
  * @author carmenxufdz
  */
-public abstract class Carrera {
+public abstract class Carrera implements Runnable{
 
 }

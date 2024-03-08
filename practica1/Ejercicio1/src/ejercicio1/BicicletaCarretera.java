@@ -9,5 +9,6 @@ package ejercicio1;
  * @author carmenxufdz
  */
 public class BicicletaCarretera extends Bicicleta{
-    
+   
+    BicicletaCarretera(int id);
 }
