@@ -10,6 +10,7 @@ import java.util.Random;
  * @author carmenxufdz
  */
 public abstract class Carrera implements Runnable{
+
     ArrayList<Bicicleta> bicicletas;
     int num_bicicletas;
     float porcent_retirada;
