@@ -15,4 +15,12 @@ public abstract class Bicicleta {
     {
         idBicicleta = id;
     }
+
+    public void correr(){
+        System.out.println("Bicicleta " + idBicicleta + " corriendo.");    
+    }
+
+    public void anuncioRetirada(){
+        System.out.println("Bicicleta " + idBicicleta + " se retira.");
+    }
 }
