@@ -9,5 +9,16 @@ package ejercicio3;
  * @author carme
  */
 public class Empleado {
+    String nombre;
+    String dni;
+    String cargo;
+    String tipo_contrato;
     
+    Empleado(EmpleadoBuilder builder)
+    {
+        this.nombre = builder.nombre;
+        this.dni = builder.dni;
+        this.cargo = builder.cargo;
+        this.tipo_contrato = builder.tipo_contrato;
+    }
 }
