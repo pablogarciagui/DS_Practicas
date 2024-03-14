@@ -4,6 +4,9 @@
  */
 package ejercicio1;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+
 /**
  *
  * @author carmenxufdz
@@ -14,14 +17,13 @@ public class Ejercicio1 {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
-        int num_bicicletas;
-        if(args.length != 2){
-            System.out.println("ERROR: Es necesario un argumento");
+        int num_bicicletas = 0;
+        if(args.length != 1){
+            System.out.println("ERROR: Es necesario un solo argumento");
             System.exit(1);
         }
         else{
-            num_bicicletas = Integer.parseInt(args[1]);
+            num_bicicletas = Integer.parseInt(args[0]);
         }
         System.out.println("==========| COMIENZA LA CARRERA |==========");
         
@@ -29,18 +31,32 @@ public class Ejercicio1 {
         FactoriaCarreraYBicicleta factoriaCarretera = new FactoriaCarretera();
         FactoriaCarreraYBicicleta factoriaMontana = new FactoriaMontana();
         
+        // Creamos tantas bicicletas como se indica en el argumento
+
+        ArrayList<Bicicleta> auxBCarretera = new ArrayList<Bicicleta>();
+        ArrayList<Bicicleta> auxBMontana = new ArrayList<Bicicleta>();
+
+        for(int i = 0; i< num_bicicletas; i++){
+            auxBCarretera.add(factoriaCarretera.crearBicicleta(i));
+            auxBMontana.add(factoriaMontana.crearBicicleta(i+num_bicicletas));
+        }
+
         // Cada factoria crea su carrera
         Carrera carreraCarretera = factoriaCarretera.crearCarrera();
         Carrera carreraMontana = factoriaMontana.crearCarrera();
         
-        
+        // Se introducen las carreras en las bicicletas
+        carreraCarretera.addNumBicicletas(auxBCarretera);
+        carreraMontana.addNumBicicletas(auxBMontana);
         
         Thread h1 = new Thread(carreraCarretera);
         Thread h2 = new Thread(carreraMontana);
         
-        h1.run();
-        h2.run();
+        // Se inician las hebras
+        h1.start();
+        h2.start();
         
+        // Esperamos a que se unan las hebras
         try{
             h1.join();
         } catch (InterruptedException e){
@@ -52,7 +68,6 @@ public class Ejercicio1 {
         } catch (InterruptedException e){
             e.printStackTrace();
         }
-    
     
     }
     
