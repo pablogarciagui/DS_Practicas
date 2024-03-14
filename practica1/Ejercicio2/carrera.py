@@ -1,4 +1,5 @@
-class Carrera:
+from abc import ABC, abstractmethod
+class Carrera(ABC):
     __DURACION = 60
     bicicletas = []
 
@@ -31,3 +32,7 @@ class Carrera:
     def addNumBicicletas(bicis): # Para este el nombre lo veo un poco raro
         for bicicleta in bicis:
             Carrera.bicicletas.append(bicis[bicicleta])
+
+    @abstractmethod
+    def clone(self):
+        pass
