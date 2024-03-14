@@ -8,6 +8,11 @@ package ejercicio3;
  *
  * @author carme
  */
-public class EmpleadoMedioTiempoBuilder {
-    
+public class EmpleadoMedioTiempoBuilder extends EmpleadoBuilder{
+    @Override
+    public EmpleadoMedioTiempoBuilder tipoContrato(String tipoContrato)
+    {
+        super.tipo_contrato = tipoContrato;
+        return this;
+    }
 }

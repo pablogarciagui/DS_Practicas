@@ -10,4 +10,10 @@ package ejercicio3;
  */
 public class EmpleadoTiempoCompletoBuilder extends EmpleadoBuilder{
     
+    @Override
+    public EmpleadoTiempoCompletoBuilder tipoContrato(String tipoContrato)
+    {
+        super.tipo_contrato = tipoContrato;
+        return this;
+    }
 }
