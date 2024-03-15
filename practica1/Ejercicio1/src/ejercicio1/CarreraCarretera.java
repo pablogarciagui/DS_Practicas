@@ -30,4 +30,10 @@ public class CarreraCarretera extends Carrera {
         super.retirarBicicletasPorcentaje();
         System.out.println("Se retiran "+ porcent_retirada*100 + "% de CareraCarretera");
     }
+
+    @Override
+    public void retirarBicicleta(){
+        super.retirarBicicleta();
+        System.out.print("CarreraCarretera\n");
+    }
 }

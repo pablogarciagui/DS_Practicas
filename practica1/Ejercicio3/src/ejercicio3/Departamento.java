@@ -10,7 +10,7 @@ import java.util.ArrayList;
  *
  * @author carme
  */
-public class Departamento implements ElementoJerarquico {
+public class Departamento {
     String nombre;
     ArrayList<Departamento> subDepartamentos;
     ArrayList<Empleado> empleados;
