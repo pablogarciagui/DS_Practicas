@@ -15,4 +15,5 @@ public class EmpleadoMedioTiempoBuilder extends EmpleadoBuilder{
         super.tipo_contrato = tipoContrato;
         return this;
     }
+
 }
