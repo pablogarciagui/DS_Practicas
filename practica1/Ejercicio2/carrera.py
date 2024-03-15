@@ -1,4 +1,5 @@
-class Carrera:
+from abc import ABC, abstractmethod
+class Carrera(ABC):
     __DURACION = 60
     bicicletas = []
 

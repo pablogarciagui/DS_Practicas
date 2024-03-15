@@ -9,5 +9,14 @@ package ejercicio3;
  * @author carme
  */
 public class Director {
+    EmpleadoBuilder builder;
+    Director(EmpleadoBuilder builder)
+    {
+        this.builder = builder;
+    }
     
+    void buildEmpleado()
+    {
+       this.builder.build();
+    }
 }
