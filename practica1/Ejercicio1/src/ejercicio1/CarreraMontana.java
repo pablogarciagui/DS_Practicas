@@ -27,6 +27,6 @@ public class CarreraMontana extends Carrera{
     @Override
     public void retirarBicicletasPorcentaje(){
         super.retirarBicicletasPorcentaje();
-        System.out.println("Se retiran "+ porcent_retirada + "% de CarreraMontana");
+        System.out.println("Se retiran "+ porcent_retirada*100 + "% de CarreraMontana");
     }
 }
