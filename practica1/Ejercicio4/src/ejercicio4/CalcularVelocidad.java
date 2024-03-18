@@ -8,6 +8,6 @@ package ejercicio4;
  *
  * @author carme
  */
-public class CalcularVelocidad {
+public class CalcularVelocidad implements Filtro{
     
 }
