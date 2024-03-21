@@ -3,18 +3,29 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
 package vista;
-
+import ejercicio4.Objetivo;
 /**
  *
  * @author carme
  */
 public class Salpicadero extends javax.swing.JPanel {
-
+    Objetivo objetivo;
+    Velocimetro velocimetro;
+    CuentaKilometros cuentaKilometros;
+    CuentaRevoluciones cuentaRevoluciones;
     /**
      * Creates new form Salpicadero
      */
-    public Salpicadero() {
+    public Salpicadero(Objetivo o) {
+        this.objetivo = o;
+        velocimetro = new Velocimetro(this);
+        cuentaKilometros = new CuentaKilometros(this); 
+        cuentaRevoluciones = new CuentaRevoluciones(this);
         initComponents();
+    }
+
+    public Objetivo getObjetivo() {
+        return objetivo;
     }
 
     /**

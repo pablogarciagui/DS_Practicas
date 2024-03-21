@@ -9,11 +9,12 @@ package vista;
  * @author carme
  */
 public class Velocimetro extends javax.swing.JPanel {
-
+    Salpicadero salpicadero;
     /**
      * Creates new form Velocimetro
      */
-    public Velocimetro() {
+    public Velocimetro(Salpicadero s) {
+        this.salpicadero = s;
         initComponents();
     }
 

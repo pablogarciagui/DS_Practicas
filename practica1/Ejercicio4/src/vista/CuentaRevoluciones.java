@@ -9,11 +9,12 @@ package vista;
  * @author carme
  */
 public class CuentaRevoluciones extends javax.swing.JPanel {
-
+    Salpicadero salpicadero;
     /**
      * Creates new form CuentaRevoluciones
      */
-    public CuentaRevoluciones() {
+    public CuentaRevoluciones(Salpicadero s) {
+        this.salpicadero = s;
         initComponents();
     }
 
