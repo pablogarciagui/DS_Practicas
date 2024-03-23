@@ -6,7 +6,7 @@ public class CalcularVelocidad implements Filtro{
         this.incrementoVelocidad = 0;
     }
 
-    double ejecutar(double revoluciones, EstadoMotor estadomotor){
+    public double ejecutar(double revoluciones, EstadoMotor estadomotor){
         switch (estadomotor) {
             case APAGADO:
                 incrementoVelocidad = 0;
@@ -30,5 +30,7 @@ public class CalcularVelocidad implements Filtro{
 
         if((revoluciones + incrementoVelocidad) <= MAX_REVOLUCIONES)
             revoluciones += incrementoVelocidad;
+
+        return revoluciones;
     }
 }
