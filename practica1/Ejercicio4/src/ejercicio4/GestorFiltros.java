@@ -6,8 +6,20 @@ package ejercicio4;
 
 /**
  *
- * @author carme
+ * @author jesus
  */
 public class GestorFiltros {
+    private CadenaFiltros cadenaFiltros;
     
+    public GestorFiltros(){
+        this.cadenaFiltros = new CadenaFiltros();
+    }
+    
+    public void addFiltro (Filtro filtro){
+        cadenaFiltros.addFiltro(filtro);
+    }
+    
+    public void peticionCadenaFiltros() {
+        cadenaFiltros.ejecutar();
+    }
 }
