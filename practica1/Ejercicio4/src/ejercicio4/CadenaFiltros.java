@@ -20,13 +20,16 @@ public class CadenaFiltros {
         this.filtros = new ArrayList<Filtro>();
     }
 
-    void peticionFiltros(double revoluciones, EstadoMotor estadoMotor){
-        filtros.forEach((filtro)->filtro.ejecutar(revoluciones, estadoMotor));
-        objetivo.ejecutar(revoluciones, estadoMotor);
+    void peticionFiltros(){
+        ejecutar();
     }
 
-    void ejecutar (double revoluciones, EstadoMotor estadoMotor){
-        filtros.forEach((filtro)->filtro.ejecutar(revoluciones, estadoMotor));
-        objetivo.ejecutar(revoluciones, estadoMotor);
+    void ejecutar (){
+        double revoluciones_recalculadas=objetivo.getRevoluciones();
+        EstadoMotor estadoMotor= objetivo.getEstado();
+        for(int i=0;i < filtros.size();i++){
+            revoluciones_recalculadas+=filtros.get(i).ejecutar(revoluciones_recalculadas, estadoMotor);
+        };
+        objetivo.ejecutar(revoluciones_recalculadas, estadoMotor);
     }
 }
