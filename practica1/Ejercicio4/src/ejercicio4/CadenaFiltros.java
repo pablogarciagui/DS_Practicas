@@ -4,10 +4,40 @@
  */
 package ejercicio4;
 
+import java.util.ArrayList;
+
+import controlador.EstadoMotor;
+
 /**
  *
  * @author carme
  */
 public class CadenaFiltros {
-    
+    Objetivo objetivo;
+    ArrayList<Filtro> filtros;
+
+    CadenaFiltros(){
+        this.filtros = new ArrayList<Filtro>();
+    }
+
+    void peticionFiltros(){
+        ejecutar();
+    }
+
+    void ejecutar (){
+        double revoluciones_recalculadas = this.objetivo.getRevoluciones();
+        EstadoMotor estadoMotor = this.objetivo.getEstado();
+        for(int i=0;i < this.filtros.size();i++){
+            revoluciones_recalculadas+=this.filtros.get(i).ejecutar(revoluciones_recalculadas, estadoMotor);
+        };
+        this.objetivo.ejecutar(revoluciones_recalculadas, estadoMotor);
+    }
+
+    void setObjetivo(Objetivo objetivo){
+        this.objetivo = objetivo;
+    }
+
+    void addFiltro(Filtro filtro){
+        this.filtros.add(filtro);
+    }
 }

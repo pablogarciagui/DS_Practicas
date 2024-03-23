@@ -63,6 +63,7 @@ public abstract class Carrera implements Runnable{
     public void retirarBicicleta(){
         int last_id = num_bicicletas-1;
         if (last_id >= 0) {
+            System.out.print("Bicicleta "+ bicicletas.get(last_id).idBicicleta + " se retira de ");
             bicicletas.remove(last_id);
             num_bicicletas--;
         }

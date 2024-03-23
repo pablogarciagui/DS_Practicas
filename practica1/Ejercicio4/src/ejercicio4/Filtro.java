@@ -4,10 +4,13 @@
  */
 package ejercicio4;
 
+import controlador.EstadoMotor;
+
 /**
  *
  * @author carme
  */
 public interface Filtro {
-    
+    static final int DISMINUCION = -1;
+    double ejecutar(double revoluciones, EstadoMotor estadoMotor);
 }
