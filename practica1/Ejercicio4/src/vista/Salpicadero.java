@@ -10,16 +10,11 @@ import ejercicio4.Objetivo;
  */
 public class Salpicadero extends javax.swing.JPanel {
     Objetivo objetivo;
-    private CuentaKilometros distancia;
-    private CuentaRevoluciones revoluciones;
-    private Velocimetro velocidad;
+
     /**
      * Creates new form Salpicadero
      */
     public Salpicadero(Objetivo o) {
-        distancia = new CuentaKilometros(this);
-        revoluciones = new CuentaRevoluciones(this);
-        velocidad = new Velocimetro(this);
         this.objetivo = o;
         initComponents();
     }
@@ -37,19 +32,108 @@ public class Salpicadero extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        velocimetro = new Velocimetro(this);
+        jLabel1 = new javax.swing.JLabel();
+        cuentaRevoluciones = new CuentaRevoluciones(this);
+        jLabel2 = new javax.swing.JLabel();
+        cuentaKilometros = new CuentaKilometros(this);
+        jLabel3 = new javax.swing.JLabel();
+
+        velocimetro.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        jLabel1.setText("Velocimetro");
+
+        javax.swing.GroupLayout velocimetroLayout = new javax.swing.GroupLayout(velocimetro);
+        velocimetro.setLayout(velocimetroLayout);
+        velocimetroLayout.setHorizontalGroup(
+            velocimetroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(velocimetroLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        velocimetroLayout.setVerticalGroup(
+            velocimetroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(velocimetroLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1)
+                .addContainerGap(160, Short.MAX_VALUE))
+        );
+
+        cuentaRevoluciones.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        jLabel2.setText("Cuenta Revoluciones");
+
+        javax.swing.GroupLayout cuentaRevolucionesLayout = new javax.swing.GroupLayout(cuentaRevoluciones);
+        cuentaRevoluciones.setLayout(cuentaRevolucionesLayout);
+        cuentaRevolucionesLayout.setHorizontalGroup(
+            cuentaRevolucionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(cuentaRevolucionesLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel2)
+                .addContainerGap(244, Short.MAX_VALUE))
+        );
+        cuentaRevolucionesLayout.setVerticalGroup(
+            cuentaRevolucionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(cuentaRevolucionesLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel2)
+                .addContainerGap(160, Short.MAX_VALUE))
+        );
+
+        cuentaKilometros.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        jLabel3.setText("Cuenta Kilometros");
+
+        javax.swing.GroupLayout cuentaKilometrosLayout = new javax.swing.GroupLayout(cuentaKilometros);
+        cuentaKilometros.setLayout(cuentaKilometrosLayout);
+        cuentaKilometrosLayout.setHorizontalGroup(
+            cuentaKilometrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(cuentaKilometrosLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel3)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        cuentaKilometrosLayout.setVerticalGroup(
+            cuentaKilometrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(cuentaKilometrosLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel3)
+                .addContainerGap(160, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(32, 32, 32)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(velocimetro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(cuentaRevoluciones, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(cuentaKilometros, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(32, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addComponent(velocimetro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(cuentaRevoluciones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(cuentaKilometros, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(30, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel cuentaKilometros;
+    private javax.swing.JPanel cuentaRevoluciones;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JPanel velocimetro;
     // End of variables declaration//GEN-END:variables
 }
