@@ -14,21 +14,7 @@ public class Empleado {
     String cargo;
     String tipoContrato;
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
 
-    public void setDni(String dni) {
-        this.dni = dni;
-    }
-
-    public void setCargo(String cargo) {
-        this.cargo = cargo;
-    }
-
-    public void setTipo_contrato(String tipo_contrato) {
-        this.tipoContrato = tipo_contrato;
-    }
     
     Empleado(String nombre, String dni, String cargo, String tipoContrato)
     {
@@ -46,6 +32,18 @@ public class Empleado {
         string += "\tContrato actual: "+ this.tipoContrato+" \n";
         return string;
     };
+    
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public void setDni(String dni) {
+        this.dni = dni;
+    }
+
+    public void setCargo(String cargo) {
+        this.cargo = cargo;
+    }
 
     public void setTipoContrato(String tipoContrato) {
         this.tipoContrato = tipoContrato;

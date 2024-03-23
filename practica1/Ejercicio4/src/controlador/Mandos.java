@@ -27,7 +27,7 @@ public class Mandos extends javax.swing.JPanel implements Runnable{
 
      @Override
      public void run(){
-         while(true){
+        while(true){
             cliente.peticionGestorFiltros();  //Se manda la peticion a los Filtros para su posterior actualizacion en el Salpicadero
             salpicadero.actualizarEstado(comandoActual);   //Se pide actualizar los jLabels
 
