@@ -3,8 +3,8 @@ from carreraCarretera import CarreraCarretera
 from BicicletaCarretera import BicicletaCarretera
 
 class FactoriaCarretera(FactoriaCarreraYBicicleta):
-    def crearCarrera(self, bicicletas):
-        return CarreraCarretera(bicicletas)
+    def crearCarrera(bicicletas):
+        return CarreraCarretera(bicicletas, porcent_retirada=0)
 
-    def crearBicicleta(self, id):
+    def crearBicicleta(id):
         return BicicletaCarretera(id)

@@ -6,10 +6,11 @@ import time
 import threading
 
 if __name__ == "__main__":
-    num_bicicletas = usuario
+    usuario = input("Bicicletas: ")
+    num_bicicletas = int(usuario)
 
-    factoriaCarretera = FactoriaCarretera()
-    factoriaMontana = FactoriaMontana()
+    factoriaCarretera = FactoriaCarretera
+    factoriaMontana = FactoriaMontana
 
     auxBCarretera = []
     auxBMontana = []
@@ -18,15 +19,17 @@ if __name__ == "__main__":
         auxBCarretera.append(factoriaCarretera.crearBicicleta(i))
         auxBMontana.append(factoriaMontana.crearBicicleta(i+num_bicicletas))
 
-    carreraCarretera = factoriaCarretera.crearCarrera()
-    carreraMontana = factoriaMontana.crearCarrera()
+    carreraCarretera = factoriaCarretera.crearCarrera(auxBCarretera)
+    carreraMontana = factoriaMontana.crearCarrera(auxBMontana)
 
     carreraCarretera.addNumBicicletas(auxBCarretera)
     carreraMontana.addNumBicicletas(auxBMontana)
 
-    h1 = threading.Thread(target=carreraCarretera)
-    h2 = threading.Thread(target=carreraMontana)
+    carreraCarretera.comenzarCarrera()
+    carreraMontana.comenzarCarrera()
 
-    h1.start()
-    h2.start()
+    carreraCarretera.retirarBicicletasPorcentaje(70)
+    carreraMontana.retirarBicicletasPorcentaje(70)
 
+    carreraCarretera.acabarCarrera()
+    carreraMontana.acabarCarrera()
