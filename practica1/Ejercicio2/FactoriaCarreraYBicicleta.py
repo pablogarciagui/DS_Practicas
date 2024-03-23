@@ -2,9 +2,9 @@ from abc import ABC, abstractmethod
 
 class FactoriaCarreraYBicicleta(ABC):
     @abstractmethod
-    def crearCarrera(self):
+    def crearCarrera():
         pass
     
     @abstractmethod
-    def crearBicicleta(self):
+    def crearBicicleta():
         pass
