@@ -15,8 +15,8 @@ public class Director {
         this.builder = builder;
     }
     
-    void buildEmpleado()
-    {
-       this.builder.build();
+    public Empleado buildEmpleado(String nombre, String DNI, String cargo) {
+        this.builder.build(nombre, DNI, cargo);
+        return this.builder.getEmpleado();
     }
 }

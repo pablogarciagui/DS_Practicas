@@ -36,9 +36,7 @@
   <SubComponents>
     <Component class="javax.swing.JLabel" name="RPM">
       <Properties>
-        <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-          <Connection code="String.format(&quot;%.2f&quot;, salpicadero.getObjetivo().getRevoluciones())" type="code"/>
-        </Property>
+        <Property name="text" type="java.lang.String" value="Cuenta Revoluciones"/>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
             <LineBorder/>

@@ -10,9 +10,11 @@ package ejercicio3;
  */
 public class EmpleadoMedioTiempoBuilder extends EmpleadoBuilder{
     @Override
-    public EmpleadoMedioTiempoBuilder tipoContrato(String tipoContrato)
-    {
-        super.tipo_contrato = tipoContrato;
+    public EmpleadoBuilder build(String nombre, String dni, String cargo) {
+        empleado.setNombre(nombre);
+        empleado.setDni(dni);
+        empleado.setCargo(cargo);
+        empleado.setTipoContrato("Medio Tiempo");
         return this;
     }
 
