@@ -1,10 +1,13 @@
 public class CalcularVelocidad implements Filtro{
     private double incrementoVelocidad;
+
     private int MAX_REVOLUCIONES = 5000;
+
 
     CalcularVelocidad(){
         this.incrementoVelocidad = 0;
     }
+
 
     public double ejecutar(double revoluciones, EstadoMotor estadomotor){
         switch (estadomotor) {
