@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
 
 class Bicicleta(ABC):
-    idBicicleta = none
+    idBicicleta = -1
 
     def __init__(self, id):
         self.idBicicleta = id
