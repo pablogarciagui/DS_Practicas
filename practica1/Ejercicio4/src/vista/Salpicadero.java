@@ -10,17 +10,17 @@ import ejercicio4.Objetivo;
  */
 public class Salpicadero extends javax.swing.JPanel {
     Objetivo objetivo;
-    Velocimetro velocimetro;
-    CuentaKilometros cuentaKilometros;
-    CuentaRevoluciones cuentaRevoluciones;
+    private CuentaKilometros distancia;
+    private CuentaRevoluciones revoluciones;
+    private Velocimetro velocidad;
     /**
      * Creates new form Salpicadero
      */
     public Salpicadero(Objetivo o) {
+        distancia = new CuentaKilometros(this);
+        revoluciones = new CuentaRevoluciones(this);
+        velocidad = new Velocimetro(this);
         this.objetivo = o;
-        velocimetro = new Velocimetro(this);
-        cuentaKilometros = new CuentaKilometros(this); 
-        cuentaRevoluciones = new CuentaRevoluciones(this);
         initComponents();
     }
 

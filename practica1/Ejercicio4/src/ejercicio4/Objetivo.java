@@ -41,8 +41,6 @@ public class Objetivo {
         return distanciaTotal;
     }
 
-    
-
     public double getRevoluciones() {
         return revoluciones;
     }
@@ -58,6 +56,7 @@ public class Objetivo {
         this.velocidad = 2 * Math.PI * RADIO * revoluciones * 0.06;
         this.distancia += this.velocidad/3600;
         this.distanciaTotal += this.velocidad/3600;
+        
         return revoluciones;  
     }
     
