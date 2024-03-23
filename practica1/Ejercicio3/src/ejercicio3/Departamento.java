@@ -10,7 +10,7 @@ import java.util.ArrayList;
  *
  * @author carme
  */
-public class Departamento implements ElementoJerarquico {
+public class Departamento {
     String nombre;
     ArrayList<Departamento> subDepartamentos;
     ArrayList<Empleado> empleados;
@@ -86,6 +86,10 @@ public class Departamento implements ElementoJerarquico {
             }
         }
     };
+
+    public void cambiarSuperior(Departamento nuevoSuperior){
+        this.DepSuperior = nuevoSuperior;
+    }
 
     public void removeEmpleado(String dni) {
         if (dni != null) {
