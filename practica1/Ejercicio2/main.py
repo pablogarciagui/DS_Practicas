@@ -3,7 +3,6 @@ from FactoriaCarreraYBicicleta import FactoriaCarreraYBicicleta
 from FactoriaCarretera import FactoriaCarretera
 from FactoriaMontana import FactoriaMontana
 import time
-import threading
 
 if __name__ == "__main__":
     usuario = input("Bicicletas: ")
