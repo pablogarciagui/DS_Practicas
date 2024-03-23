@@ -4,7 +4,6 @@
  */
 package ejercicio1;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 /**
@@ -38,6 +37,7 @@ public class Ejercicio1 {
 
         for(int i = 0; i< num_bicicletas; i++){
             auxBCarretera.add(factoriaCarretera.crearBicicleta(i));
+            // Para diferenciarlas fácilmente usamos distintos ids en cada tipo de carrera
             auxBMontana.add(factoriaMontana.crearBicicleta(i+num_bicicletas));
         }
 
