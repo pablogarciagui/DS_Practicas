@@ -17,6 +17,12 @@ public class Velocimetro extends javax.swing.JPanel {
         this.salpicadero = s;
         initComponents();
     }
+    
+        
+    public void update()
+    {
+        velocimetro.setText(String.format("%.2f", salpicadero.getObjetivo().getVelocidad()));
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -29,7 +35,7 @@ public class Velocimetro extends javax.swing.JPanel {
 
         velocimetro = new javax.swing.JLabel();
 
-        velocimetro.setText(String.format("%.2f", salpicadero.getObjetivo().getVelocidad()));
+        velocimetro.setText("Velocimetro");
         velocimetro.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);

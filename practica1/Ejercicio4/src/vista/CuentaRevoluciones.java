@@ -17,6 +17,11 @@ public class CuentaRevoluciones extends javax.swing.JPanel {
         this.salpicadero = s;
         initComponents();
     }
+    
+    public void update()
+    {
+        RPM.setText(String.format("%.2f", salpicadero.getObjetivo().getRevoluciones()));
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -29,7 +34,7 @@ public class CuentaRevoluciones extends javax.swing.JPanel {
 
         RPM = new javax.swing.JLabel();
 
-        RPM.setText(String.format("%.2f", salpicadero.getObjetivo().getRevoluciones()));
+        RPM.setText("Cuenta Revoluciones");
         RPM.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
