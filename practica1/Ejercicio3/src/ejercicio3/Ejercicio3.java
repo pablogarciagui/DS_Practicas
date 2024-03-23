@@ -24,7 +24,7 @@ public class Ejercicio3 {
         EmpleadoTiempoCompletoBuilder CompletoBuilder = new EmpleadoTiempoCompletoBuilder();
         
         director = new Director(CompletoBuilder);
-        Empleado empleado2 = director.buildEmpleado("Juan", "75914632Y", "Diseñador");
+        Empleado empleado2 = director.buildEmpleado("Maria", "85246314H", "Diseñador");
         System.out.println("Empleado2:\n" + empleado2.toString());
         
         // Con esto hemos comprobado la correcta funcionalidad del patron

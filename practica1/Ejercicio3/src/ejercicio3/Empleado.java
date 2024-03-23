@@ -27,9 +27,8 @@ public class Empleado {
     }
 
     public void setTipo_contrato(String tipo_contrato) {
-        this.tipo_contrato = tipo_contrato;
+        this.tipoContrato = tipo_contrato;
     }
-    String tipo_contrato = null;
     
     Empleado(String nombre, String dni, String cargo, String tipoContrato)
     {
@@ -44,7 +43,7 @@ public class Empleado {
         string += "Nombre: "+ this.nombre+" \n";
         string += "\tDNI: "+ this.dni+" \n";
         string += "\tCargo: "+ this.cargo+" \n";
-        string += "\tContrato actual: "+ this.tipo_contrato+" \n";
+        string += "\tContrato actual: "+ this.tipoContrato+" \n";
         return string;
     };
 
