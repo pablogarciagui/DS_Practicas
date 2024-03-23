@@ -4,10 +4,29 @@
  */
 package ejercicio4;
 
+import java.util.ArrayList;
+
+import controlador.EstadoMotor;
+
 /**
  *
  * @author carme
  */
 public class CadenaFiltros {
-    
+    Objetivo objetivo;
+    ArrayList<Filtro> filtros;
+
+    CadenaFiltros(){
+        this.filtros = new ArrayList<Filtro>();
+    }
+
+    void peticionFiltros(double revoluciones, EstadoMotor estadoMotor){
+        filtros.forEach((filtro)->filtro.ejecutar(revoluciones, estadoMotor));
+        objetivo.ejecutar(revoluciones, estadoMotor);
+    }
+
+    void ejecutar (double revoluciones, EstadoMotor estadoMotor){
+        filtros.forEach((filtro)->filtro.ejecutar(revoluciones, estadoMotor));
+        objetivo.ejecutar(revoluciones, estadoMotor);
+    }
 }
