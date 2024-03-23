@@ -9,5 +9,9 @@ package ejercicio4;
  * @author carme
  */
 public class CalcularVelocidad implements Filtro{
-    
+    private double incrementoVelocidad;
+
+    CalcularVelocidad(){
+        this.incrementoVelocidad = 0;
+    }
 }
