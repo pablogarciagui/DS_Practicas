@@ -16,6 +16,10 @@ public class RepercutirRozamiento implements Filtro{
 
     @Override
     public double ejecutar(double revoluciones, EstadoMotor estadomotor){
-        return revoluciones - ROZAMIENTO;
+        if (revoluciones-ROZAMIENTO <0) {
+            return 0;
+        } else {
+            return revoluciones - ROZAMIENTO;
+        }
     }
 }

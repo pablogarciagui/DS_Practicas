@@ -10,7 +10,7 @@ import controlador.EstadoMotor;
 public class CalcularVelocidad implements Filtro{
     private double incrementoVelocidad;
 
-    private int MAX_REVOLUCIONES = 5000;
+    private static final double MAX_REVOLUCIONES = 5000;
 
 
     CalcularVelocidad(){
@@ -20,6 +20,7 @@ public class CalcularVelocidad implements Filtro{
 
     @Override
     public double ejecutar(double revoluciones, EstadoMotor estadomotor){
+        double rev = revoluciones;
         switch (estadomotor) {
             case APAGADO:
                 incrementoVelocidad = 0;
@@ -41,9 +42,12 @@ public class CalcularVelocidad implements Filtro{
                 break;
         }
 
-        if((revoluciones + incrementoVelocidad) <= MAX_REVOLUCIONES)
-            revoluciones += incrementoVelocidad;
-
-        return revoluciones;
+        if((rev + incrementoVelocidad) <= MAX_REVOLUCIONES){
+            rev += incrementoVelocidad;
+        }
+        else {
+            rev = MAX_REVOLUCIONES;
+        }
+        return rev;
     }
 }
