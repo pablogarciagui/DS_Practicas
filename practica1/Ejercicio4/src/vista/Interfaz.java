@@ -3,17 +3,26 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
 package vista;
+import java.awt.*;
+
+import javax.swing.JFrame;
+
+import controlador.Mandos;
 
 /**
  *
  * @author carme
  */
-public class Interfaz extends javax.swing.JPanel {
+public class Interfaz extends javax.swing.JFrame {
 
+    Mandos mandos;
+    Salpicadero salpicadero;
     /**
      * Creates new form Interfaz
      */
-    public Interfaz() {
+    public Interfaz(Mandos m, Salpicadero s) {
+        mandos = m;
+        salpicadero = s;
         initComponents();
     }
 
@@ -25,17 +34,11 @@ public class Interfaz extends javax.swing.JPanel {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
-        );
+        this.setLayout(new FlowLayout(FlowLayout.CENTER,10, 10));
+        // this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        this.setSize(new Dimension(1000,600));
+        this.add(salpicadero);
+        this.add(mandos);
     }// </editor-fold>//GEN-END:initComponents
 
 

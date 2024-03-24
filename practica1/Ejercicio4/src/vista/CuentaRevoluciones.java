@@ -10,6 +10,8 @@ package vista;
  */
 public class CuentaRevoluciones extends javax.swing.JPanel {
     Salpicadero salpicadero;
+    private javax.swing.JLabel RPM;
+    private javax.swing.JLabel nombre;
     /**
      * Creates new form CuentaRevoluciones
      */
@@ -28,7 +30,9 @@ public class CuentaRevoluciones extends javax.swing.JPanel {
     private void initComponents() {
 
         RPM = new javax.swing.JLabel();
-
+        nombre = new javax.swing.JLabel();
+        nombre.setText("CuentaRevoluciones");
+        
         RPM.setText(String.format("%.2f", salpicadero.getObjetivo().getRevoluciones()));
         RPM.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
@@ -36,8 +40,8 @@ public class CuentaRevoluciones extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(nombre)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(83, Short.MAX_VALUE)
                 .addComponent(RPM, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(82, 82, 82))
         );
@@ -45,13 +49,15 @@ public class CuentaRevoluciones extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(60, 60, 60)
+                .addComponent(nombre)
+                .addGap(18, 18, 18)
                 .addComponent(RPM, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(60, Short.MAX_VALUE))
+               
         );
     }// </editor-fold>//GEN-END:initComponents
 
-
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel RPM;
-    // End of variables declaration//GEN-END:variables
+    public void actualizar(){
+        RPM.setText(String.format("%.2f", salpicadero.getObjetivo().getRevoluciones()));
+    }
 }

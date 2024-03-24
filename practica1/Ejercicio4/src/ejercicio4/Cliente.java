@@ -4,6 +4,8 @@
  */
 package ejercicio4;
 
+import controlador.EstadoMotor;
+
 /**
  *
  * @author jesus
@@ -15,7 +17,7 @@ public class Cliente {
         this.gestorFiltros = gestor;
     }
     
-    public void peticionGestorFiltros(){
-        gestorFiltros.peticionCadenaFiltros();
+    public void peticionGestorFiltros(EstadoMotor estadoMotor){
+        gestorFiltros.peticionCadenaFiltros(estadoMotor);
     }
 }

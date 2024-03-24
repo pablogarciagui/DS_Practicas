@@ -4,6 +4,8 @@
  */
 package ejercicio4;
 
+import controlador.EstadoMotor;
+
 /**
  *
  * @author jesus
@@ -11,15 +13,16 @@ package ejercicio4;
 public class GestorFiltros {
     private CadenaFiltros cadenaFiltros;
     
-    public GestorFiltros(){
-        this.cadenaFiltros = new CadenaFiltros();
+    public GestorFiltros(Objetivo objetivo){
+        this.cadenaFiltros = new CadenaFiltros(objetivo);
     }
     
     public void addFiltro (Filtro filtro){
         cadenaFiltros.addFiltro(filtro);
     }
     
-    public void peticionCadenaFiltros() {
-        cadenaFiltros.ejecutar();
+    public void peticionCadenaFiltros(EstadoMotor estadoMotor) {
+        System.err.println("Peticion");
+        cadenaFiltros.peticionFiltros(estadoMotor);
     }
 }

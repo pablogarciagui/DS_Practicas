@@ -5,7 +5,6 @@
 package ejercicio4;
 
 import controlador.EstadoMotor;
-import controlador.Mandos;
         
 /**
  *
@@ -21,7 +20,7 @@ public class Objetivo {
     private double velocidad;       // Velocidad Lineal km/h
     public final double RADIO = 0.15;
     
-    Objetivo(){
+    public Objetivo(){
         distanciaTotal = 0;
         distancia = 0;
         velocidad = 0;
@@ -32,6 +31,11 @@ public class Objetivo {
     public EstadoMotor getEstado()
     {
         return estadomotor;
+    }
+
+    public EstadoMotor setEstadoMotor(EstadoMotor es)
+    {
+        return this.estadomotor = es;
     }
     
     public double getDistancia() {
@@ -54,10 +58,14 @@ public class Objetivo {
         this.estadomotor = estadomotor;
         this.revoluciones = revoluciones;
         this.velocidad = 2 * Math.PI * RADIO * revoluciones * 0.06;
-        this.distancia += this.velocidad/3600;
-        this.distanciaTotal += this.velocidad/3600;
-        
-        return revoluciones;  
+        if (estadomotor == EstadoMotor.APAGADO) {
+            this.distancia = 0;
+        }else{
+            this.distancia += this.velocidad/3600;
+            this.distanciaTotal += this.velocidad/3600;
+        }
+        System.err.println(estadomotor);
+        return revoluciones; 
     }
     
     public void resetDistancia() 
