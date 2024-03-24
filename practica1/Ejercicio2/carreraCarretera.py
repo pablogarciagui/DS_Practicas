@@ -1,4 +1,4 @@
-from Carrera import Carrera
+from carrera import Carrera
 from copy import deepcopy
 
 class CarreraCarretera(Carrera):

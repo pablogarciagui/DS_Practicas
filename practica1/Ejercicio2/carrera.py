@@ -7,28 +7,28 @@ class Carrera(ABC):
         self.num_bicicletas = num_bicicletas
         self.porcent_retirada = porcent_retirada
 
-    def comenzarCarrera():
+    def comenzarCarrera(self):
         print("Comienza la carrera.\n")
 
-    def acabarCarrera():
+    def acabarCarrera(self):
         print("Acaba la carrera.\n")
 
-    def retirarBicicleta():
-        if(len(Carrera.bicicletas) > 0):
-            Carrera.bicicletas = Carrera.bicicletas[:-1] # Quita la última bicicleta si hay bicicletas
+    def retirarBicicleta(self):
+        if(len(self.bicicletas) > 0):
+            self.bicicletas = self.bicicletas[:-1] # Quita la última bicicleta si hay bicicletas
 
-    def retirarBicicletasPorcentaje(porcent_retirada):
-        bicis_retirar = len(Carrera.bicicletas)*(float)(porcent_retirada/100)
+    def retirarBicicletasPorcentaje(self, porcent_retirada):
+        bicis_retirar = len(self.bicicletas)*(float)(porcent_retirada/100)
 
-        for bicicleta in range(bicis_retirar):
-            Carrera.retirarBicicleta()
+        for bicicleta in range(int(bicis_retirar)):
+            self.retirarBicicleta()
 
-    def retirarBicicletasTodas():
-        Carrera.bicicletas = []
+    def retirarBicicletasTodas(self):
+        self.bicicletas = []
 
-    def anadirBicicleta(Bicicleta):
-        Carrera.bicicletas.append(Bicicleta)
+    def anadirBicicleta(self, Bicicleta):
+        self.bicicletas.append(Bicicleta)
 
-    def addNumBicicletas(bicis): # Para este el nombre lo veo un poco raro
+    def addNumBicicletas(self, bicis): # Para este el nombre lo veo un poco raro
         for bicicleta in bicis:
-            Carrera.bicicletas.append(bicis[bicicleta])
+            self.bicicletas.append(bicicleta)

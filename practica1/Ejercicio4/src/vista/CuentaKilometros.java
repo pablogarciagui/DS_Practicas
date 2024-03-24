@@ -22,7 +22,14 @@ public class CuentaKilometros extends javax.swing.JPanel {
         this.salpicadero = s;
         initComponents();
     }
+    
+    public void update()
+    {
+        contadorReciente.setText(String.format("%.2f", salpicadero.getObjetivo().getDistancia()));
+        contadorTotal.setText(String.format("%.2f", salpicadero.getObjetivo().getDistanciaTotal()));
+    }
 
+        
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

@@ -19,6 +19,12 @@ public class Velocimetro extends javax.swing.JPanel {
         this.salpicadero = s;
         initComponents();
     }
+    
+        
+    public void update()
+    {
+        velocimetro.setText(String.format("%.2f", salpicadero.getObjetivo().getVelocidad()));
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
