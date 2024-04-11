@@ -18,23 +18,31 @@ public abstract class Carrera implements Runnable{
     private static final int DURACION = 60;
 
     public void run(){
+        // Generamos un tiempo aleatorio menor que DURACIÓN, porque las bicicletas se deben retirar antes
         Random rand = new Random(); 
         int r = rand.nextInt(DURACION-1);
         
+        // Comenzamos la carrera
         comenzarCarrera();
+
+        // La hebra no hace nada durante ese tiempo aleatorio
         try {
             Thread.sleep(r*1000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
 
+        // Retira las bicicletas correspondientes al porcentaje
         retirarBicicletasPorcentaje();
 
+        // Espera el tiempo de carrera que queda
         try {
             Thread.sleep((DURACION-r)*1000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+
+        // Termina la carrera
         acabarCarrera();
     }
 
@@ -44,16 +52,18 @@ public abstract class Carrera implements Runnable{
     }
 
     public void comenzarCarrera(){
-
+        // Cada tipo de carrera tendra su cierre
     }
 
     public void acabarCarrera(){
         retirarBicicletasTodas();
+        System.out.println("Todas las bicicletas se retiran");
     }
 
     public void retirarBicicleta(){
         int last_id = num_bicicletas-1;
         if (last_id >= 0) {
+            System.out.print("Bicicleta "+ bicicletas.get(last_id).idBicicleta + " se retira de ");
             bicicletas.remove(last_id);
             num_bicicletas--;
         }

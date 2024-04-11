@@ -1,4 +1,229 @@
-\documentclass{article}
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{\phantomsection\label{_4dxye01l00ko}{}
+
+\phantomsection\label{_51o6olohl73d}{}
+
+\phantomsection\label{_37s0yi2f6kdl}{}
+
+\phantomsection\label{_cgecg925xc3h}{}Práctica 1. Uso de patrones de
+diseño
+
+\phantomsection\label{_x1zz5rcddd5l}{}creacionales y estructurales en
+OO}
+\author{}
+\date{}
+
 \begin{document}
-Memoria
+\maketitle
+
+Integrantes del grupo:
+
+\begin{itemize}
+\item
+  Carmen Chunyin Fernández Núñez
+\item
+  Pablo García Guijosa
+\item
+  Marta Xiaoyang Moraga Hernández
+\item
+  Jesús Navarrete Caparrós
+\end{itemize}
+\break
+\section{Índice}\label{uxedndice}
+
+\hyperref[uxedndice]{\textbf{}}
+
+\begin{quote}
+\hyperref[ejercicio-1.-patruxf3n-factoruxeda-abstracta-en-java]{Ejercicio
+1. Patrón Factoría Abstracta en Java 2}
+
+\hyperref[ejercicio-2.-patruxf3n-factoruxeda-abstracta-patruxf3n-prototipo]{Ejercicio
+2. Patrón Factoría Abstracta + Patrón Prototipo 2}
+
+\hyperref[ejercicio-3.-patruxf3n-libre]{Ejercicio 3. Patrón libre 3}
+
+\hyperref[ejercicio-4.-el-patruxf3n-filtros-de-intercepciuxf3n-en-java.]{Ejercicio
+4. El patrón filtros de intercepción en java. 3}
+\end{quote}
+
+Los diagramas se encuentran en unas imágenes aparte.
+
+practica1/DiagramaEJ1.jpg
+
+practica1/DiagramaEJ3.jpg
+
+practica1/DiagramaEJ4.jpg
+
+La numeración es por el ejercicio que representan. El DiagramaEJ1 es un
+caso especial porque se utiliza tanto para el Ejercicio 1 y 2.
+
+\subsection{\texorpdfstring{\hfill\break
+}{ }}\label{section}
+
+\subsection{\texorpdfstring{\textbf{Ejercicio 1. Patrón Factoría
+Abstracta en
+Java}}{Ejercicio 1. Patrón Factoría Abstracta en Java}}\label{ejercicio-1.-patruxf3n-factoruxeda-abstracta-en-java}
+
+En este ejercicio, seguimos el guión proporcionado por el profesor a la
+hora de crear el diagrama e implementar las clases. Para el manejo de
+las bicicletas y carreras, implementamos funciones que retiraban
+bicicletas específicas dadas un porcentaje.
+
+En la interfaz FactoriaCarreteraYBicicleta, implementamos dos métodos
+``crearCarrera()'' y ``crearBicicleta()'' en vez de crear uno solo que
+crease los dos objetos, debido a que en java se debe preestablecer qué
+tipo de objeto se devuelve.
+
+Debido al uso de hebras, la clase carrera debe implementar el método
+run() de la interfaz Runnable.
+
+\subsection{\texorpdfstring{\textbf{Ejercicio 2. Patrón Factoría
+Abstracta + Patrón
+Prototipo}}{Ejercicio 2. Patrón Factoría Abstracta + Patrón Prototipo}}\label{ejercicio-2.-patruxf3n-factoruxeda-abstracta-patruxf3n-prototipo}
+
+Tomamos la implementación del ejercicio 1 hecha en Java y la traducimos
+a Python (uso de abstractmethod (pues las clases abstractas y las
+interfaces no existen por defecto en Python), eliminar tipos de las
+variables, etc).
+
+Además, añadimos el patrón prototipo, que implementamos para poder
+clonar Bicicletas. Para realizarlo, utilizamos la función "deepcopy" del
+paquete "copy", que implementa lo que necesitamos. Esto, como su nombre
+indica, nos permitirá crear una copia profunda y no superficial.
+
+\subsection{\texorpdfstring{\textbf{Ejercicio 3}. \textbf{Patrón
+libre}}{Ejercicio 3. Patrón libre}}\label{ejercicio-3.-patruxf3n-libre}
+
+En este ejercicio se nos ha dado la oportunidad de ser mas creativos, creando nuestro propio programa con el patrón y lenguaje que quisiéramos, y finalmente nos hemos decantado por realizar en java la unión de los patrones software: Builder y Composite. 
+
+En el ejercicio en cuestión implementamos el patrón builder en la creación de empleados, que pueden ser  a tiempo completo o a medio tiempo, gracias a la clase director que utiliza a EmpleadoBuilder, que declara los métodos específicos de un empleado, para construir diferentes trabajadores basados en las especificaciones proporcionadas. Y por otra parte, utilizamos el patrón Composite en la clase Departamento, que se utiliza para representar tanto elementos individuales como colecciones de elementos de manera uniforme. En este caso, utilizaremos este patrón para representar la estructura jerárquica de los departamentos y subdepartamentos.
+
+El objetivo del ejercicio propuesto es realizar un programa que permita crear, agregar y eliminar empleados, y a su vez, poder añadirlo a un departamento o subdepartamento, reflejando la estructura organizativa de una empresa de manera intuitiva y sencilla.
+
+\subsection{\texorpdfstring{\textbf{Ejercicio 4. El patrón filtros de
+intercepción en
+java.}}{Ejercicio 4. El patrón filtros de intercepción en java.}}\label{ejercicio-4.-el-patruxf3n-filtros-de-intercepciuxf3n-en-java.}
+
+En este ejercicio, para el diseño se utiliza el patrón Filtros de
+Intercepción tal y como se indica en el ejercicio, y el estilo
+Modelo-Vista-Controlador.
+
+La interfaz muestra al usuario la información (revoluciones, distancia
+recorrida, etc), a través de los botones se le indica al Controlador las
+órdenes y éste se comunica con el Cliente, quién hace una petición al
+Gestor de filtros. Esta petición llega hasta la Cadena de Filtros, que
+ejecuta los filtros y recalculan las revoluciones; con esto ejecuta el
+Objetivo, que actualiza sus datos. Después de la comunicación con el
+cliente, el Controlador ordena a la Vista que se actualice, y como ya se
+ha ejecutado Objetivo, toma los datos nuevos del Modelo.
+
+Para la implementación se utiliza el diagrama resultante de la fase de
+diseño y se respetan las restricciones del ejercicio. Uno de los puntos
+más importantes y que hubo que solucionar fue el cómo realizar la
+actualización de valores.
+
+Para ello, se utiliza un ScheduledExecutorService en el controlador para
+poder programar que cada segundo se ejecute una petición al cliente y
+que se actualice la interfaz. Gracias a esto, la velocidad seguirá
+aumentando o reduciéndose mientras que el acelerador o freno estén
+activos. No sólo eso, si no que además, si ninguno está activo o se
+apaga el motor, se irá perdiendo una velocidad equivalente al
+rozamiento. Esto es así porque un coche apagado o que no esté siendo
+acelerado ni frenado; no para en seco, si no que será afectado por el
+rozamiento hasta que pierda toda la velocidad.
+
+Comportamiento de nuestra solución:
+
+\begin{itemize}
+\item
+  La máxima velocidad del motor es 5000 RPM. Aunque, la final será 4970
+  porque tiene que luchar contra el rozamiento.
+\item
+  Apagar el motor reinicia el cuentakilómetros reciente y hace que no se
+  añadan al cuentakilómetros total kilómetros.
+\item
+  Si el motor se apaga cuando tiene una velocidad, no para en seco.
+  Pierde velocidad por el rozamiento, ni frena ni acelera.
+\item
+  Todas las otras que da el ejercicio.
+\end{itemize}
+
+Para \textbf{ejecutar} el .jar:
+
+\textbf{java -jar -\/-enable-preview .\textbackslash Ejercicio4.jar}
+
+\begin{itemize}
+\item
+  Al ejecutar se abre la interfaz y en la línea de comandos se puede ver
+  las peticiones que se van haciendo. Hay una petición cada segundo,
+  como se ha explicado al hablar de la actualización de valores.
+\item
+  Para cerrar el programa hacerlo desde la línea de comandos con Ctrl +
+  C.
+\end{itemize}
+
 \end{document}

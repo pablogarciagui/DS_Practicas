@@ -1,10 +1,10 @@
 from FactoriaCarreraYBicicleta import FactoriaCarreraYBicicleta
-from CarreraMontana import CarreraMontana
+from carreraMontana import CarreraMontana
 from BicicletaMontana import BicicletaMontana
 
 class FactoriaMontana(FactoriaCarreraYBicicleta):
-    def crearCarrera(self, bicicletas):
-        return CarreraMontana(bicicletas)
+    def crearCarrera(bicicletas):
+        return CarreraMontana(bicicletas, porcent_retirada=0)
 
-    def crearBicicleta(self, id):
+    def crearBicicleta(id):
         return BicicletaMontana(id)

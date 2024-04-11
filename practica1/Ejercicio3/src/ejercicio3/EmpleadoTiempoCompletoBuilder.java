@@ -11,9 +11,11 @@ package ejercicio3;
 public class EmpleadoTiempoCompletoBuilder extends EmpleadoBuilder{
     
     @Override
-    public EmpleadoTiempoCompletoBuilder tipoContrato(String tipoContrato)
-    {
-        super.tipo_contrato = tipoContrato;
+    public EmpleadoBuilder build(String nombre, String dni, String cargo) {
+        empleado.setNombre(nombre);
+        empleado.setDni(dni);
+        empleado.setCargo(cargo);
+        empleado.setTipoContrato("Tiempo Completo");
         return this;
     }
 }
