@@ -4,18 +4,15 @@ class ElementoEmpresa {
   String nombre ='';
   late List<ElementoEmpresa> subDepartamentos;
   late List<Empleado> empleados;
-  ElementoEmpresa DepSuperior;
+  late ElementoEmpresa DepSuperior ;
 
   ElementoEmpresa(String nombre) {
     this.nombre = nombre;
-    this.subDepartamentos = new List<ElementoEmpresa>();
-    this.empleados = new List<Empleado>();
-    this.DepSuperior;
   }
 
   ElementoEmpresa(String nombre, ElementoEmpresa Superior) {
     this(nombre);
-    Superior.addDepartamento(this);
+    DepSuperior.addDepartamento(this);
   }
 
   void addEmpleado(Empleado empleado) {

@@ -1,14 +1,13 @@
 import 'elementoEmpresa.dart';
 
 class Empleado extends ElementoEmpresa {
-  String nombre = '';
   String dni = '';
   String cargo = '';
   String tipoContrato = '';
 
   Empleado(String nombre, String dni, String cargo, String tipoContrato) : super('')
   {
-    this.nombre = nombre;
+    super.nombre = nombre;
     this.dni = dni;
     this.cargo = cargo;
     this.tipoContrato = tipoContrato;
@@ -24,7 +23,7 @@ class Empleado extends ElementoEmpresa {
   }
 
   void setNombre(String nombre) {
-    this.nombre = nombre;
+    super.nombre = nombre;
   }
 
   void setDni(String dni) {
@@ -39,20 +38,20 @@ class Empleado extends ElementoEmpresa {
     this.tipoContrato = tipoContrato;
   }
 
-  // Si vemos que no hace falta esto se quita
+
   void addEmpleado(Empleado empleado){
-    System.out.println("Un empleado no puede contener elementos jerarquicos");
+    // error
   }
 
-  void addDepartamento(Departamento departamento){
-    System.out.println("Un empleado no puede contener elementos jerarquicos");
+  void addDepartamento(ElementoEmpresa departamento){
+    // error
   }
 
   void removeEmpleado(String dni){
-    System.out.println("Un empleado no puede contener elementos jerarquicos");
+    // error
   }
   
   void removeDepartamento(String nombre){
-    System.out.println("Un empleado no puede contener elementos jerarquicos");
+    // error
   }
 }
