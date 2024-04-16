@@ -5,14 +5,14 @@ class Empleado extends ElementoEmpresa {
   String cargo = '';
   String tipoContrato = '';
 
-  Empleado(String nombre, String dni, String cargo, String tipoContrato) : super('')
+  Empleado(super.nombre, String dni, String cargo, String tipoContrato)
   {
-    super.nombre = nombre;
     this.dni = dni;
     this.cargo = cargo;
     this.tipoContrato = tipoContrato;
   }
 
+  @override
   String toString(){
     String string="";
     string += "Nombre: "+ this.nombre+" \n";
@@ -38,20 +38,34 @@ class Empleado extends ElementoEmpresa {
     this.tipoContrato = tipoContrato;
   }
 
+  @override
+  void addEmpleado(Empleado empleado)
+  {
 
-  void addEmpleado(Empleado empleado){
-    // error
   }
+  @override
+  bool esSuPadre(ElementoEmpresa departamento)
+  {
+    return false;
+  }
+  @override
+  void addDepartamento(ElementoEmpresa departamento)
+  {
 
-  void addDepartamento(ElementoEmpresa departamento){
-    // error
   }
+  @override
+  void cambiarSuperior(ElementoEmpresa nuevoSuperior)
+  {
 
-  void removeEmpleado(String dni){
-    // error
   }
-  
-  void removeDepartamento(String nombre){
-    // error
+  @override
+  void removeEmpleado(String dni)
+  {
+
+  }
+  @override
+  void removeDepartamento(String nombre)
+  {
+
   }
 }
