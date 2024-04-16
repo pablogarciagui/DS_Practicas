@@ -5,7 +5,7 @@ class Empleado extends ElementoEmpresa {
   String cargo = '';
   String tipoContrato = '';
 
-  Empleado(super.nombre, String dni, String cargo, String tipoContrato)
+  Empleado(nombre, String dni, String cargo, String tipoContrato) : super(nombre)
   {
     this.dni = dni;
     this.cargo = cargo;
@@ -41,7 +41,7 @@ class Empleado extends ElementoEmpresa {
   @override
   void addEmpleado(Empleado empleado)
   {
-
+    
   }
   @override
   bool esSuPadre(ElementoEmpresa departamento)

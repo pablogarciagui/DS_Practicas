@@ -4,7 +4,7 @@ abstract class ElementoEmpresa {
   late String nombre;
   late List<ElementoEmpresa> subDepartamentos;
   late List<Empleado> empleados;
-  late ElementoEmpresa DepSuperior ;
+  late ElementoEmpresa DepSuperior;
 
   ElementoEmpresa(String nombre) {
     this.nombre = nombre;

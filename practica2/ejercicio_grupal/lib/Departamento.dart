@@ -3,46 +3,40 @@ import 'empleado.dart';
 
 class Departamento extends ElementoEmpresa{
 
-  Departamento(super.nombre, ElementoEmpresa superior)
-  {
-    empleados = new List<Empleado>;
-    subDepartamentos = new List<ElementoEmpresa>;
+  Departamento(String nombre, ElementoEmpresa superior)
+      : super(nombre) {
+    empleados = <Empleado>[];
+    subDepartamentos = <ElementoEmpresa>[];
     DepSuperior = superior;
     DepSuperior.addDepartamento(this);
   }
 
-
+  @override
   void addEmpleado(Empleado empleado) {
-    if (empleado != null) {
-      bool existe = false;
 
-      for (int i = 0; i < empleados.size() && !existe; i++) {
-        if (empleados.get(i).dni == empleado.dni) {
-          existe = true;
-        }
-      }
+    bool existe = false;
 
-      if (existe) {
-        System.out.println(empleado.nombre + " ya pertenece al departamento " + this.nombre);
-      } else {
-        empleados.add(empleado);
-        System.out.println(empleado.nombre + " fue añadido al departamento " + this.nombre);
+    for (int i = 0; i < empleados.length && !existe; i++) {
+      if (empleados[i].dni == empleado.dni) {
+        existe = true;
       }
     }
-  }
+
+    if (existe) {
+      print(empleado.nombre + " already belongs to department " + this.nombre);
+    } else {
+      empleados.add(empleado);
+      print(empleado.nombre + " was added to department " + this.nombre);
+    }
+   }
 
   @override
   bool esSuPadre(ElementoEmpresa departamento){
-
     if (this.DepSuperior == null) {
-      // Si mi superior es nulo, el que entra no puede ser mi padre
       return false;
-    }else if(departamento == this.DepSuperior){
-      // Si mi superior es el que entra, el que entra es mi padre
+    } else if (departamento == this.DepSuperior) {
       return true;
-    }else {
-      // Si tengo superior, pero no es el que entra, le pregunto a mi padre si
-      // su superior es el que entra
+    } else {
       return this.DepSuperior.esSuPadre(departamento);
     }
 
@@ -56,18 +50,18 @@ class Departamento extends ElementoEmpresa{
       if ( !this.esSuPadre(departamento)) {
         bool nombre_repetido = false;
 
-        for (int i = 0; i < subDepartamentos.size() && !nombre_repetido; i++) {
-          if (subDepartamentos.get(i).nombre == departamento.nombre) {
+        for (int i = 0; i < subDepartamentos.length && !nombre_repetido; i++) {
+          if (subDepartamentos[i].nombre == departamento.nombre) {
             nombre_repetido = true;
           }
         }
 
         if (nombre_repetido) {
-          System.out.println(departamento.nombre + " ya es subdepartamento en " + this.nombre);
+          print(departamento.nombre + " is already a subdepartment in " + this.nombre);
         } else {
           departamento.DepSuperior = this;
-          this.subDepartamentos.add(departamento);
-          System.out.println(departamento.nombre + " fue añadido como subdepartamento de " + this.nombre);
+          subDepartamentos.add(departamento);
+          print(departamento.nombre + " was added as a subdepartment of " + this.nombre);
         }
       }
     }
@@ -83,18 +77,18 @@ class Departamento extends ElementoEmpresa{
     if (dni != null) {
       bool existe = false;
       int id = 0;
-      for (int i = 0; i < empleados.size() && !existe; i++) {
-        if (empleados.get(i).dni == dni) {
+      for (int i = 0; i < empleados.length && !existe; i++) {
+        if (empleados[i].dni == dni) {
           existe = true;
           id = i;
         }
       }
 
       if (existe) {
-        empleados.remove(id);
-        System.out.println("Empleado con DNI: " + dni + " ha sido elimiado del departamento " + this.nombre);
+        empleados.removeAt(id);
+        print("Empleado with DNI: " + dni + " was removed from department " + this.nombre);
       } else {
-        System.out.println("Empleado con DNI: " + dni + " no existe en " + this.nombre);
+        print("Empleado with DNI: " + dni + " does not exist in " + this.nombre);
       }
     }
   };
@@ -102,19 +96,19 @@ class Departamento extends ElementoEmpresa{
   @override
   void removeDepartamento(String nombre) {
     if (nombre != null) {
-      Boolean existe = false;
+      bool existe = false;
       int id = 0;
-      for (int i = 0; i < subDepartamentos.size() && !existe; i++) {
-        if (subDepartamentos.get(i).nombre == nombre) {
+      for (int i = 0; i < subDepartamentos.length && !existe; i++) {
+        if (subDepartamentos[i].nombre == nombre) {
           existe = true;
           id = i;
         }
       }
       if (existe) {
-        subDepartamentos.remove(id);
-        System.out.println("Subdepartamento con nombre: " + nombre + " ha sido elimiado del departamento " + this.nombre);
+        subDepartamentos.removeAt(id);
+        print("Subdepartamento with name: " + nombre + " was removed from " + this.nombre);
       } else {
-        System.out.println("Subdepartamento con nombre: " + nombre + " no existe en " + this.nombre);
+        print("Subdepartamento with name: " + nombre + " does not exist in " + this.nombre);
       }
     }
   }
@@ -123,12 +117,12 @@ class Departamento extends ElementoEmpresa{
   String toString() {
     String string = this.nombre + "\n";
     string += "Lista de empleados directos del departamento "+this.nombre+":\n";
-    for (int i = 0; i < empleados.size(); i++) {
-      string += i + ".\t" + empleados.get(i).toString();
+    for (int i = 0; i < empleados.length; i++) {
+      string += i + ".\t" + empleados[i].toString();
     }
     string += "Lista de subdepartamentos:\n";
-    for (int i = 0; i < subDepartamentos.size(); i++) {
-      string +="SubDep:"+ 1 + "\t" + subDepartamentos.get(i).toString();
+    for (int i = 0; i < subDepartamentos.length; i++) {
+      string +="SubDep:"+ 1 + "\t" + subDepartamentos[i].toString();
     }
     return string;
   }
