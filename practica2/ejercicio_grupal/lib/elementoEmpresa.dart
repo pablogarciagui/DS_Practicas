@@ -1,26 +1,16 @@
 import 'empleado.dart';
 
 abstract class ElementoEmpresa {
-  late String nombre;
-  late List<ElementoEmpresa> subDepartamentos;
-  late List<Empleado> empleados;
-  late ElementoEmpresa DepSuperior;
 
-  ElementoEmpresa(String nombre) {
-    this.nombre = nombre;
-  }
+  void addElementoEmpresa(ElementoEmpresa elemento);
 
-  void addEmpleado(Empleado empleado);
+  void removeElementoEmpresa(ElementoEmpresa elemento);
 
-  bool esSuPadre(ElementoEmpresa departamento);
-
-  void addDepartamento(ElementoEmpresa departamento);
+  bool? esSuPadre(ElementoEmpresa departamento);
 
   void cambiarSuperior(ElementoEmpresa nuevoSuperior);
 
-  void removeEmpleado(String dni);
-
-  void removeDepartamento(String nombre);
+  ElementoEmpresa getElementoEmpresa(int index);
 
   String toString();
 }

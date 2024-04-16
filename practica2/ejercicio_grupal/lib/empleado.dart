@@ -1,18 +1,20 @@
 import 'elementoEmpresa.dart';
 
 class Empleado extends ElementoEmpresa {
+  String nombre = '';
   String dni = '';
   String cargo = '';
   String tipoContrato = '';
 
-  Empleado(nombre, String dni, String cargo, String tipoContrato) : super(nombre)
+  Empleado(nombre, String dni, String cargo, String tipoContrato)
   {
+    this.nombre = nombre;
     this.dni = dni;
     this.cargo = cargo;
     this.tipoContrato = tipoContrato;
   }
 
-  @override
+
   String toString(){
     String string="";
     string += "Nombre: "+ this.nombre+" \n";
@@ -23,7 +25,7 @@ class Empleado extends ElementoEmpresa {
   }
 
   void setNombre(String nombre) {
-    super.nombre = nombre;
+    this.nombre = nombre;
   }
 
   void setDni(String dni) {
@@ -39,33 +41,33 @@ class Empleado extends ElementoEmpresa {
   }
 
   @override
-  void addEmpleado(Empleado empleado)
-  {
-    
-  }
-  @override
-  bool esSuPadre(ElementoEmpresa departamento)
-  {
-    return false;
-  }
-  @override
-  void addDepartamento(ElementoEmpresa departamento)
+  void addElementoEmpresa(ElementoEmpresa elemento)
   {
 
   }
+
+  @override
+  void removeElementoEmpresa(ElementoEmpresa elemento)
+  {
+
+  }
+
+  @override
+  bool? esSuPadre(ElementoEmpresa departamento)
+  {
+
+  }
+
   @override
   void cambiarSuperior(ElementoEmpresa nuevoSuperior)
   {
 
   }
-  @override
-  void removeEmpleado(String dni)
-  {
 
-  }
   @override
-  void removeDepartamento(String nombre)
+  ElementoEmpresa getElementoEmpresa(int index)
   {
-
+    return this;
   }
+
 }

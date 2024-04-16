@@ -13,4 +13,5 @@ class Director {
     this.builder.build(nombre, DNI, cargo);
     return this.builder.getEmpleado();
   }
+
 }
