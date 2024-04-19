@@ -12,7 +12,7 @@ class Departamento extends ElementoEmpresa{
 
     if (superior != null) {
       DepSuperior = superior;
-      DepSuperior.addElementoEmpresa(this);
+      DepSuperior?.addElementoEmpresa(this);
     }
   }
 
@@ -39,7 +39,6 @@ class Departamento extends ElementoEmpresa{
 
   }
 
-
   @override
   void cambiarSuperior(ElementoEmpresa nuevoSuperior){
     this.DepSuperior = nuevoSuperior;
@@ -56,20 +55,21 @@ class Departamento extends ElementoEmpresa{
   }
 
   @override
-  String toString() {
-    String string = this.nombre + "\n";
-    string += "Lista de empleados directos del departamento "+this.nombre+":\n";
-    for (int i = 0; i < empleados.length; i++) {
-      string += i + ".\t" + empleados[i].toString();
-    }
-    string += "Lista de subdepartamentos:\n";
-    for (int i = 0; i < subDepartamentos.length; i++) {
-      string +="SubDep:"+ 1 + "\t" + subDepartamentos[i].toString();
+  String mostrarJerarquia() {
+    String string = "Departamento: " + this.nombre + "\n";
+    for (int i = 0; i < elementos.length; i++) {
+      string += "\t" + elementos[i].toString();
     }
     return string;
   }
 
   List<ElementoEmpresa> getElementos(){
     return elementos;
+  }
+
+  @override
+  String toString(){
+    String s = this.nombre;
+    return s;
   }
 }

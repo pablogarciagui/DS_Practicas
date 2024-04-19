@@ -14,10 +14,10 @@ class Empleado extends ElementoEmpresa {
     this.tipoContrato = tipoContrato;
   }
 
-
-  String toString(){
-    String string="";
-    string += "Nombre: "+ this.nombre+" \n";
+  @override
+  String mostrarJerarquia(){
+    String string="Empleado:\n";
+    string += "\tNombre: "+ this.nombre+" \n";
     string += "\tDNI: "+ this.dni+" \n";
     string += "\tCargo: "+ this.cargo+" \n";
     string += "\tContrato actual: "+ this.tipoContrato+" \n";
@@ -68,6 +68,12 @@ class Empleado extends ElementoEmpresa {
   ElementoEmpresa getElementoEmpresa(int index)
   {
     return this;
+  }
+
+  @override
+  String toString(){
+    String s = this.nombre;
+    return s;
   }
 
 }
