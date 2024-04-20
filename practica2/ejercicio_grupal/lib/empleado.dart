@@ -5,13 +5,18 @@ class Empleado extends ElementoEmpresa {
   String dni = '';
   String cargo = '';
   String tipoContrato = '';
+  ElementoEmpresa? DepSuperior;
 
-  Empleado(nombre, String dni, String cargo, String tipoContrato)
+  Empleado(nombre, String dni, String cargo, String tipoContrato, ElementoEmpresa? superior)
   {
     this.nombre = nombre;
     this.dni = dni;
     this.cargo = cargo;
     this.tipoContrato = tipoContrato;
+    if (superior != null) {
+      DepSuperior = superior;
+      DepSuperior?.addElementoEmpresa(this);
+    }
   }
 
   @override
@@ -74,6 +79,10 @@ class Empleado extends ElementoEmpresa {
   String toString(){
     String s = this.nombre;
     return s;
+  }
+
+  ElementoEmpresa? getElemento(ElementoEmpresa elemento) {
+    return null;
   }
 
 }

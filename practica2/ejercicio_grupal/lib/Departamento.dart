@@ -72,4 +72,13 @@ class Departamento extends ElementoEmpresa{
     String s = this.nombre;
     return s;
   }
+
+  @override
+  ElementoEmpresa? getElemento(ElementoEmpresa elemento) {
+    for(int i=0; i<elementos.length; i++){
+      if(elementos[i] == elemento)
+        return elemento.getElementoEmpresa(i);
+    }
+    return null;
+  }
 }

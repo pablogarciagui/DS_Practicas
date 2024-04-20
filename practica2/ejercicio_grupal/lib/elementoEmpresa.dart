@@ -12,6 +12,8 @@ abstract class ElementoEmpresa {
 
   ElementoEmpresa getElementoEmpresa(int index);
 
+  ElementoEmpresa? getElemento(ElementoEmpresa elemento);
+
   String mostrarJerarquia();
 
   String toString();

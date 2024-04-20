@@ -1,5 +1,8 @@
+import 'package:ejercicio_grupal/empleadoBuilder.dart';
 import 'package:flutter/material.dart';
 //import 'package:untitled3/sum.dart';
+import 'director.dart';
+import 'elementoEmpresa.dart';
 
 void main() {
   //print("hola");
@@ -155,3 +158,104 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 }
+
+
+void _addDepartment(ElementoEmpresa? DepSuperior) {
+  Director director = new Director(new EmpleadoMedioTiempoBuilder());
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      String name = '';
+      return AlertDialog(
+        title: Text('Add Department'),
+        content: TextFormField(
+          decoration: InputDecoration(hintText: 'Department name'),
+          onChanged: (value) {
+            name = value;
+          },
+        ),
+        actions: <Widget>[
+          ElevatedButton(
+            child: Text('Add'),
+            onPressed: () {
+              Navigator.of(context).pop();
+              setState(() {
+                director.addDepartamento(name, DepSuperior);
+              });
+            },
+          ),
+        ],
+      );
+    },
+  );
+}
+
+void _addEmployee(ElementoEmpresa? DepSuperior) {
+  late Director director;
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      String name = '';
+      String dni = '';
+      String position = '';
+      String contractType = '';
+      return AlertDialog(
+        title: Text('Add Employee'),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            TextFormField(
+              decoration: InputDecoration(hintText: 'Employee name'),
+              onChanged: (value) {
+                name = value;
+              },
+            ),
+            TextFormField(
+              decoration: InputDecoration(hintText: 'DNI'),
+              onChanged: (value) {
+                dni = value;
+              },
+            ),
+            TextFormField(
+              decoration: InputDecoration(hintText: 'Position'),
+              onChanged: (value) {
+                position = value;
+              },
+            ),
+            DropdownButtonFormField<String>(
+              decoration: InputDecoration(hintText: 'Contract type'),
+              value: contractType,
+              onChanged: (value) {
+                setState(() {
+                  contractType = value!;
+                });
+              },
+              items: ['Full-time', 'Part-time']
+                  .map((contractType) => DropdownMenuItem(
+                value: contractType,
+                child: Text(contractType),
+              ))
+                  .toList(),
+            ),
+          ],
+        ),
+        actions: <Widget>[
+          ElevatedButton(
+            child: Text('Add'),
+            onPressed: () {
+              Navigator.of(context).pop();
+              if(contractType == 'Full-time')
+                director = new Director(new EmpleadoTiempoCompletoBuilder(DepSuperior));
+              else
+                director = new Director(new EmpleadoMedioTiempoBuilder(DepSuperior));
+              setState(() {
+                director.addEmpleado(name, dni, position, DepSuperior);
+              });
+            },
+          ),
+        ],
+      );
+    },
+  );
+}
+
