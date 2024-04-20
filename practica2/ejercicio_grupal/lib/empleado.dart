@@ -5,18 +5,24 @@ class Empleado extends ElementoEmpresa {
   String dni = '';
   String cargo = '';
   String tipoContrato = '';
+  ElementoEmpresa? DepSuperior;
 
-  Empleado(String nombre, String dni, String cargo, String tipoContrato) : super('')
+  Empleado(nombre, String dni, String cargo, String tipoContrato, ElementoEmpresa? superior)
   {
     this.nombre = nombre;
     this.dni = dni;
     this.cargo = cargo;
     this.tipoContrato = tipoContrato;
+    if (superior != null) {
+      DepSuperior = superior;
+      DepSuperior?.addElementoEmpresa(this);
+    }
   }
 
-  String toString(){
-    String string="";
-    string += "Nombre: "+ this.nombre+" \n";
+  @override
+  String mostrarJerarquia(){
+    String string="Empleado:\n";
+    string += "\tNombre: "+ this.nombre+" \n";
     string += "\tDNI: "+ this.dni+" \n";
     string += "\tCargo: "+ this.cargo+" \n";
     string += "\tContrato actual: "+ this.tipoContrato+" \n";
@@ -39,20 +45,44 @@ class Empleado extends ElementoEmpresa {
     this.tipoContrato = tipoContrato;
   }
 
-  // Si vemos que no hace falta esto se quita
-  void addEmpleado(Empleado empleado){
-    System.out.println("Un empleado no puede contener elementos jerarquicos");
+  @override
+  void addElementoEmpresa(ElementoEmpresa elemento)
+  {
+
   }
 
-  void addDepartamento(Departamento departamento){
-    System.out.println("Un empleado no puede contener elementos jerarquicos");
+  @override
+  void removeElementoEmpresa(ElementoEmpresa elemento)
+  {
+
   }
 
-  void removeEmpleado(String dni){
-    System.out.println("Un empleado no puede contener elementos jerarquicos");
+  @override
+  bool? esSuPadre(ElementoEmpresa departamento)
+  {
+
   }
-  
-  void removeDepartamento(String nombre){
-    System.out.println("Un empleado no puede contener elementos jerarquicos");
+
+  @override
+  void cambiarSuperior(ElementoEmpresa nuevoSuperior)
+  {
+
   }
+
+  @override
+  ElementoEmpresa getElementoEmpresa(int index)
+  {
+    return this;
+  }
+
+  @override
+  String toString(){
+    String s = this.nombre;
+    return s;
+  }
+
+  ElementoEmpresa? getElemento(ElementoEmpresa elemento) {
+    return null;
+  }
+
 }
