@@ -50,16 +50,24 @@ class Empleado extends ElementoEmpresa {
   }
 
   @override
-  void addElementoEmpresa(ElementoEmpresa elemento) {}
+  void addElementoEmpresa(ElementoEmpresa elemento) {
+    throw UnimplementedError();
+  }
 
   @override
-  void removeElementoEmpresa(ElementoEmpresa? elemento) {}
+  void removeElementoEmpresa(ElementoEmpresa? elemento) {
+    throw UnimplementedError();
+  }
 
   @override
-  bool? esSuPadre(ElementoEmpresa departamento) {}
+  bool? esSuPadre(ElementoEmpresa departamento) {
+    throw UnimplementedError();
+  }
 
   @override
-  void cambiarSuperior(ElementoEmpresa? nuevoSuperior) {}
+  void cambiarSuperior(ElementoEmpresa? nuevoSuperior) {
+    throw UnimplementedError();
+  }
 
   @override
   ElementoEmpresa getElementoEmpresa(int index) {
@@ -90,7 +98,7 @@ class Empleado extends ElementoEmpresa {
     return DepSuperior;
   }
   @override
-  List<ElementoEmpresa> getElementos() { return [];}
+  List<ElementoEmpresa> getElementos() { throw UnimplementedError();}
 
   @override
   void delete() {
