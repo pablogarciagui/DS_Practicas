@@ -1,7 +1,7 @@
 import 'elementoEmpresa.dart';
 import 'empleado.dart';
 
-class Departamento extends ElementoEmpresa{
+class Departamento extends ElementoEmpresa {
   String nombre = '';
   late List<ElementoEmpresa> elementos;
   ElementoEmpresa? DepSuperior;
@@ -22,35 +22,34 @@ class Departamento extends ElementoEmpresa{
     elementos.add(elemento);
   }
 
-
   @override
-  bool? esSuPadre(ElementoEmpresa departamento){
+  bool? esSuPadre(ElementoEmpresa departamento) {
     if (this.DepSuperior == null) {
       return false;
     } else if (departamento == this.DepSuperior) {
       return true;
     } else {
       bool? r = this.DepSuperior?.esSuPadre(departamento);
-      if (r==null || r == false)
+      if (r == null || r == false)
         return false;
       else
         return true;
     }
-
   }
 
   @override
-  void cambiarSuperior(ElementoEmpresa nuevoSuperior){
+  void cambiarSuperior(ElementoEmpresa? nuevoSuperior) {
     this.DepSuperior = nuevoSuperior;
   }
 
   @override
-  void removeElementoEmpresa(ElementoEmpresa elemento){
+  void removeElementoEmpresa(ElementoEmpresa? elemento) {
     elementos.remove(elemento);
+    elemento?.delete();
   }
 
   @override
-  ElementoEmpresa getElementoEmpresa(int index){
+  ElementoEmpresa getElementoEmpresa(int index) {
     return elementos[index];
   }
 
@@ -63,22 +62,36 @@ class Departamento extends ElementoEmpresa{
     return string;
   }
 
-  List<ElementoEmpresa> getElementos(){
+  @override
+  List<ElementoEmpresa> getElementos() {
     return elementos;
   }
 
   @override
-  String toString(){
+  String toString() {
     String s = this.nombre;
     return s;
   }
 
   @override
   ElementoEmpresa? getElemento(ElementoEmpresa elemento) {
-    for(int i=0; i<elementos.length; i++){
-      if(elementos[i] == elemento)
-        return elemento.getElementoEmpresa(i);
+    for (int i = 0; i < elementos.length; i++) {
+      if (elementos[i] == elemento) return elemento.getElementoEmpresa(i);
     }
     return null;
+  }
+
+  @override
+  ElementoEmpresa? getSuperior(){
+    return DepSuperior;
+  }
+
+  @override
+  void delete(){
+    for(int i = 0; i< elementos.length; i++){
+      elementos[i].delete();
+    }
+    DepSuperior = null;
+    elementos.clear();
   }
 }

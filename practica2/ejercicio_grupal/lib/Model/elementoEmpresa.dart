@@ -4,11 +4,11 @@ abstract class ElementoEmpresa {
 
   void addElementoEmpresa(ElementoEmpresa elemento);
 
-  void removeElementoEmpresa(ElementoEmpresa elemento);
+  void removeElementoEmpresa(ElementoEmpresa? elemento);
 
   bool? esSuPadre(ElementoEmpresa departamento);
 
-  void cambiarSuperior(ElementoEmpresa nuevoSuperior);
+  void cambiarSuperior(ElementoEmpresa? nuevoSuperior);
 
   ElementoEmpresa getElementoEmpresa(int index);
 
@@ -17,4 +17,10 @@ abstract class ElementoEmpresa {
   String mostrarJerarquia();
 
   String toString();
+
+  ElementoEmpresa? getSuperior();
+
+  List<ElementoEmpresa> getElementos();
+
+  void delete();
 }

@@ -1,24 +1,15 @@
-import 'package:ejercicio_grupal/empleadoBuilder.dart';
+
+import 'package:ejercicio_grupal/Model/EmpleadoTiempoCompletoBuilder.dart';
+import 'package:ejercicio_grupal/Model/TipoBuilder.dart';
+import 'package:ejercicio_grupal/Widgets/ListaElementosWidget.dart';
+import 'package:ejercicio_grupal/Model/director.dart';
+import 'package:ejercicio_grupal/Model/empleado.dart';
+import 'package:ejercicio_grupal/Model/empleadoBuilder.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-//import 'package:untitled3/sum.dart';
-import 'director.dart';
-import 'elementoEmpresa.dart';
+import 'package:flutter/widgets.dart';
 
 void main() {
-  //print("hola");
-  /*
-  Sum misuma1 = new Sum(5, 10);
-  Sum misuma2 = new Sum(2, 7);
-
-  //print(misuma1.resultado());
-
-  List<Sum> sumassss = [misuma1, misuma2];
-  for(int i=0; i<sumassss.length; i++){
-    print(sumassss[i].resultado());
-  }
-  */
-
-
   runApp(const MyApp());
 }
 
@@ -29,18 +20,19 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Sistema de Gestión',
+      title: 'Flutter Demo',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.yellow),
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const MyHomePage(title: 'Sistema de Gestión'),
+      home: const MyHomePage(title: 'Flutter Demo Home Page'),
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.title});
+
   final String title;
 
   @override
@@ -48,76 +40,90 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int num_empleados = 0;
-  int num_departamentos = 0;
+  TextEditingController nombre = TextEditingController();
+  TextEditingController dni = TextEditingController();
+  TextEditingController cargo = TextEditingController();
+  TextEditingController tipo_contrato = TextEditingController();
   TextEditingController nombre_dep = new TextEditingController();
-  TextEditingController dni = new TextEditingController();
-  TextEditingController cargo = new TextEditingController();
-  TextEditingController tipo_contrato = new TextEditingController();
+  final Director director = Director(EmpleadoTiempoCompletoBuilder(null));
 
-  void addEmpleado(){
-    // añadir a "base de datos"
-    // añadir a lista visual
-
-    setState(() {
-      num_empleados++;
-    });
-  }
-
-  void addDepartamento(){
-    // añadir a "base de datos"
-    // añadir a lista visual
-
-    setState(() {
-      num_departamentos++;
-    });
+  @override
+  void initState() {
+    super.initState();
   }
 
   @override
   void dispose() {
-    nombre_dep.dispose();
+    nombre.dispose();
     dni.dispose();
     cargo.dispose();
     tipo_contrato.dispose();
+    nombre_dep.dispose();
     super.dispose();
+  }
+
+  callback(){
+    setState(() {
+      director.getEmpresa();
+    });
+  }
+
+  void removeElement(){
+    setState(() {
+      director.remove();
+    });
+  }
+
+  void addEmpleado(){
+    setState(() {
+      director.addEmpleado(nombre.text, dni.text, cargo.text, director.seleccionado);
+    });
+  }
+
+  void addDepartamento(){
+    setState(() {
+      director.addDepartamento(nombre_dep.text, director.seleccionado);
+    });
   }
 
   @override
   Widget build(BuildContext context) {
+
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: Text(widget.title),
       ),
-      body: Center(
+      body: Container(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              '$num_departamentos',
-              style: Theme.of(context).textTheme.headlineMedium,
+          children: [
+          const Text(
+          'Departamentos:',
+        ),
+          TextField(
+            controller: nombre_dep,
+            obscureText: false,
+            decoration: const InputDecoration(
+              border: OutlineInputBorder(),
+              labelText: 'Nombre',
             ),
+          ),
+          ElevatedButton(
+            onPressed: addDepartamento,
+            child: const Text('Añadir'),
+          ),
+            Expanded(child: ListaElementosWidget(director: director, listElems: director.getEmpresa(),callback: callback,)),
             const Text(
-              'Departamentos:',
+              'Empleados:',
             ),
             TextField(
-              controller: nombre_dep,
+              controller: nombre,
               obscureText: false,
               decoration: InputDecoration(
                 border: OutlineInputBorder(),
                 labelText: 'Nombre',
               ),
-            ),
-            ElevatedButton(
-              onPressed: addDepartamento,
-              child: const Text('Añadir'),
-            ),
-            Text(
-              '$num_empleados',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
-            const Text(
-              'Empleados:',
             ),
             TextField(
               controller: dni,
@@ -135,127 +141,36 @@ class _MyHomePageState extends State<MyHomePage> {
                 labelText: 'Cargo',
               ),
             ),
-            TextField(
-              controller: tipo_contrato,
-              obscureText: false,
-              decoration: InputDecoration(
-                border: OutlineInputBorder(),
-                labelText: 'Tipo de contrato',
-              ),
+            DropdownMenu<TipoBuilder>(
+              requestFocusOnTap: true,
+              initialSelection: TipoBuilder.completo,
+              label: const Text('Tipo de Contrato'),
+              onSelected: (TipoBuilder? op){ setState(() {
+                if(op != null && op is TipoBuilder && op != director.getTipoBuilder()){
+                  director.changeBuilder(op);
+                }
+              });
+              },
+              dropdownMenuEntries: TipoBuilder.values.map<DropdownMenuEntry<TipoBuilder>>((TipoBuilder op) {
+                return
+                  DropdownMenuEntry<TipoBuilder>(
+                    value: op,
+                    label: op.label,
+                  );
+              }).toList(),
             ),
             ElevatedButton(
               onPressed: addEmpleado,
               child: const Text('Añadir'),
             ),
+            ElevatedButton(
+              onPressed: removeElement,
+              child: const Text('Delete'),
+            ),
           ],
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: addEmpleado,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+
+      )
     );
   }
 }
-
-
-void _addDepartment(ElementoEmpresa? DepSuperior) {
-  Director director = new Director(new EmpleadoMedioTiempoBuilder());
-  showDialog(
-    context: context,
-    builder: (BuildContext context) {
-      String name = '';
-      return AlertDialog(
-        title: Text('Add Department'),
-        content: TextFormField(
-          decoration: InputDecoration(hintText: 'Department name'),
-          onChanged: (value) {
-            name = value;
-          },
-        ),
-        actions: <Widget>[
-          ElevatedButton(
-            child: Text('Add'),
-            onPressed: () {
-              Navigator.of(context).pop();
-              setState(() {
-                director.addDepartamento(name, DepSuperior);
-              });
-            },
-          ),
-        ],
-      );
-    },
-  );
-}
-
-void _addEmployee(ElementoEmpresa? DepSuperior) {
-  late Director director;
-  showDialog(
-    context: context,
-    builder: (BuildContext context) {
-      String name = '';
-      String dni = '';
-      String position = '';
-      String contractType = '';
-      return AlertDialog(
-        title: Text('Add Employee'),
-        content: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            TextFormField(
-              decoration: InputDecoration(hintText: 'Employee name'),
-              onChanged: (value) {
-                name = value;
-              },
-            ),
-            TextFormField(
-              decoration: InputDecoration(hintText: 'DNI'),
-              onChanged: (value) {
-                dni = value;
-              },
-            ),
-            TextFormField(
-              decoration: InputDecoration(hintText: 'Position'),
-              onChanged: (value) {
-                position = value;
-              },
-            ),
-            DropdownButtonFormField<String>(
-              decoration: InputDecoration(hintText: 'Contract type'),
-              value: contractType,
-              onChanged: (value) {
-                setState(() {
-                  contractType = value!;
-                });
-              },
-              items: ['Full-time', 'Part-time']
-                  .map((contractType) => DropdownMenuItem(
-                value: contractType,
-                child: Text(contractType),
-              ))
-                  .toList(),
-            ),
-          ],
-        ),
-        actions: <Widget>[
-          ElevatedButton(
-            child: Text('Add'),
-            onPressed: () {
-              Navigator.of(context).pop();
-              if(contractType == 'Full-time')
-                director = new Director(new EmpleadoTiempoCompletoBuilder(DepSuperior));
-              else
-                director = new Director(new EmpleadoMedioTiempoBuilder(DepSuperior));
-              setState(() {
-                director.addEmpleado(name, dni, position, DepSuperior);
-              });
-            },
-          ),
-        ],
-      );
-    },
-  );
-}
-
