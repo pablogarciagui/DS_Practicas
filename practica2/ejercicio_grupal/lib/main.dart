@@ -1,4 +1,3 @@
-
 import 'package:ejercicio_grupal/Model/EmpleadoTiempoCompletoBuilder.dart';
 import 'package:ejercicio_grupal/Model/TipoBuilder.dart';
 import 'package:ejercicio_grupal/Widgets/ListaElementosWidget.dart';
@@ -62,25 +61,24 @@ class _MyHomePageState extends State<MyHomePage> {
     super.dispose();
   }
 
-  callback(){
-    setState(() {
-      director.getEmpresa();
-    });
+  callback() {
+    setState(() {});
   }
 
-  void removeElement(){
+  void removeElement() {
     setState(() {
       director.remove();
     });
   }
 
-  void addEmpleado(){
+  void addEmpleado() {
     setState(() {
-      director.addEmpleado(nombre.text, dni.text, cargo.text, director.seleccionado);
+      director.addEmpleado(
+          nombre.text, dni.text, cargo.text, director.seleccionado);
     });
   }
 
-  void addDepartamento(){
+  void addDepartamento() {
     setState(() {
       director.addDepartamento(nombre_dep.text, director.seleccionado);
     });
@@ -88,8 +86,6 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-
-
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
@@ -98,79 +94,107 @@ class _MyHomePageState extends State<MyHomePage> {
       body: Container(
         child: Column(
           children: [
-          const Text(
-          'Departamentos:',
-        ),
-          TextField(
-            controller: nombre_dep,
-            obscureText: false,
-            decoration: const InputDecoration(
-              border: OutlineInputBorder(),
-              labelText: 'Nombre',
+            const Text(
+              'Departamentos:',
             ),
-          ),
-          ElevatedButton(
-            onPressed: addDepartamento,
-            child: const Text('Añadir'),
-          ),
-            Expanded(child: ListaElementosWidget(director: director, listElems: director.getEmpresa(),callback: callback,)),
+            Row(
+              children: [
+                Flexible(
+                  child: TextField(
+                    controller: nombre_dep,
+                    obscureText: false,
+                    decoration: const InputDecoration(
+                      border: OutlineInputBorder(),
+                      labelText: 'Nombre',
+                    ),
+                  ),
+                ),
+                ElevatedButton(
+                  onPressed: addDepartamento,
+                  child: const Text('Añadir'),
+                ),
+              ],
+            ),
+
             const Text(
               'Empleados:',
             ),
-            TextField(
-              controller: nombre,
-              obscureText: false,
-              decoration: InputDecoration(
-                border: OutlineInputBorder(),
-                labelText: 'Nombre',
-              ),
+            Row(
+              children: [
+                Flexible(
+                  child: TextField(
+                    controller: nombre,
+                    obscureText: false,
+                    decoration: const InputDecoration(
+                      border: OutlineInputBorder(),
+                      labelText: 'Nombre',
+                    ),
+                  ),
+                ),
+                Flexible(
+                  child: TextField(
+                    controller: dni,
+                    obscureText: false,
+                    decoration: const InputDecoration(
+                      border: OutlineInputBorder(),
+                      labelText: 'DNI',
+                    ),
+                  ),
+                ),
+              ],
             ),
-            TextField(
-              controller: dni,
-              obscureText: false,
-              decoration: InputDecoration(
-                border: OutlineInputBorder(),
-                labelText: 'DNI',
-              ),
+            Row(
+              children: [
+                Flexible(
+                  child: TextField(
+                    controller: cargo,
+                    obscureText: false,
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(),
+                      labelText: 'Cargo',
+                    ),
+                  ),
+                ),
+                DropdownMenu<TipoBuilder>(
+                  requestFocusOnTap: true,
+                  initialSelection: TipoBuilder.completo,
+                  label: const Text('Tipo de Contrato'),
+                  onSelected: (TipoBuilder? op) {
+                    setState(() {
+                      if (op != null &&
+                          op is TipoBuilder &&
+                          op != director.getTipoBuilder()) {
+                        director.changeBuilder(op);
+                      }
+                    });
+                  },
+                  dropdownMenuEntries: TipoBuilder.values
+                      .map<DropdownMenuEntry<TipoBuilder>>((TipoBuilder op) {
+                    return DropdownMenuEntry<TipoBuilder>(
+                      value: op,
+                      label: op.label,
+                    );
+                  }).toList(),
+                ),
+                ElevatedButton(
+                  onPressed: addEmpleado,
+                  child: const Text('Añadir'),
+                ),
+              ],
             ),
-            TextField(
-              controller: cargo,
-              obscureText: false,
-              decoration: InputDecoration(
-                border: OutlineInputBorder(),
-                labelText: 'Cargo',
-              ),
-            ),
-            DropdownMenu<TipoBuilder>(
-              requestFocusOnTap: true,
-              initialSelection: TipoBuilder.completo,
-              label: const Text('Tipo de Contrato'),
-              onSelected: (TipoBuilder? op){ setState(() {
-                if(op != null && op is TipoBuilder && op != director.getTipoBuilder()){
-                  director.changeBuilder(op);
-                }
-              });
-              },
-              dropdownMenuEntries: TipoBuilder.values.map<DropdownMenuEntry<TipoBuilder>>((TipoBuilder op) {
-                return
-                  DropdownMenuEntry<TipoBuilder>(
-                    value: op,
-                    label: op.label,
-                  );
-              }).toList(),
-            ),
-            ElevatedButton(
-              onPressed: addEmpleado,
-              child: const Text('Añadir'),
-            ),
-            ElevatedButton(
-              onPressed: removeElement,
-              child: const Text('Delete'),
-            ),
+            Expanded(
+                child: ListaElementosWidget(
+                  director: director,
+                  listElems: director.getEmpresa(),
+                  callback: callback,
+                )),
           ],
         ),
-
-      )
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: removeElement,
+        child: const Text('Delete'),
+      ),
     );
   }
 }

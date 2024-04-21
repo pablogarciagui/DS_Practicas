@@ -5,9 +5,12 @@ import 'package:ejercicio_grupal/Model/elementoEmpresa.dart';
 import 'package:ejercicio_grupal/Model/empleado.dart';
 import 'package:flutter/material.dart';
 
-
 class ListaElementosWidget extends StatefulWidget {
-  const ListaElementosWidget({super.key, required this.director, required this.listElems,required this.callback});
+  const ListaElementosWidget(
+      {super.key,
+      required this.director,
+      required this.listElems,
+      required this.callback});
   final Director director;
   final List<ElementoEmpresa> listElems;
   final Function callback;
@@ -20,9 +23,7 @@ class _ListaElementosWidget extends State<ListaElementosWidget> {
   _ListaElementosWidget();
 
   callback() {
-    setState(() {
-      widget.callback();
-    });
+    widget.callback();
   }
 
   @override
@@ -33,20 +34,25 @@ class _ListaElementosWidget extends State<ListaElementosWidget> {
         itemBuilder: (BuildContext context, int index) {
           return ListTile(
             leading: Checkbox(
-              onChanged: (bool? value){
-                setState(() {
-                  widget.director.setElementoSeleccionado(widget.listElems[index]);
-                });
+              onChanged: (bool? value) {
+                widget.director
+                    .setElementoSeleccionado(widget.listElems[index]);
                 widget.callback();
               },
-              value: widget.listElems[index] == widget.director.seleccionado ? true : false,
+              value: widget.listElems[index] == widget.director.seleccionado
+                  ? true
+                  : false,
             ),
             title: Text(widget.listElems[index].toString()),
-            subtitle: widget.listElems[index] is Empleado ? EmpleadoWidget(empleado: widget.listElems[index] as Empleado):
-            ListaElementosWidget(director: widget.director,listElems:(widget.listElems[index] as Departamento).getElementos(),callback: callback,),
-
+            subtitle: widget.listElems[index] is Empleado
+                ? EmpleadoWidget(empleado: widget.listElems[index] as Empleado)
+                : ListaElementosWidget(
+                    director: widget.director,
+                    listElems: (widget.listElems[index] as Departamento)
+                        .getElementos(),
+                    callback: callback,
+                  ),
           );
-        }
-        );
+        });
   }
 }
