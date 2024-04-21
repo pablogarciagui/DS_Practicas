@@ -1,14 +1,12 @@
-import 'package:ejercicio_grupal/Model/elementoEmpresa.dart';
-
-import 'empleado.dart';
-import 'elementoEmpresa.dart';
+import 'package:ejercicio_grupal/Model/ElementoEmpresa.dart';
+import 'Empleado.dart';
 
 abstract class EmpleadoBuilder {
     late Empleado empleado;
 
     EmpleadoBuilder(ElementoEmpresa? DepSuperior)
     {
-        empleado = new Empleado.vacio();
+        empleado = Empleado.vacio();
     }
 
     EmpleadoBuilder build(String nombre, String dni, String cargo, ElementoEmpresa? DepSuperior);

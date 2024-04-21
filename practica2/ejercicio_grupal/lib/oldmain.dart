@@ -1,7 +1,7 @@
-import 'package:ejercicio_grupal/Model/empleadoBuilder.dart';
+import 'package:ejercicio_grupal/Model/EmpleadoBuilder.dart';
 import 'package:flutter/material.dart';
-import 'Model/director.dart';
-import 'Model/elementoEmpresa.dart';
+import 'Model/Director.dart';
+import 'Model/ElementoEmpresa.dart';
 
 void main() {
   //print("hola");

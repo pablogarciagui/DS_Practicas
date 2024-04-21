@@ -1,11 +1,11 @@
-import 'package:ejercicio_grupal/Model/elementoEmpresa.dart';
-import 'package:ejercicio_grupal/Model/empleado.dart';
-import 'package:ejercicio_grupal/Model/empleadoBuilder.dart';
+import 'package:ejercicio_grupal/Model/ElementoEmpresa.dart';
+import 'package:ejercicio_grupal/Model/Empleado.dart';
+import 'package:ejercicio_grupal/Model/EmpleadoBuilder.dart';
 
 class EmpleadoMedioTiempoBuilder extends EmpleadoBuilder{
 
-  EmpleadoMedioTiempoBuilder(ElementoEmpresa? DepSuperior) : super(DepSuperior){
-  }
+  EmpleadoMedioTiempoBuilder(ElementoEmpresa? DepSuperior) : super(DepSuperior);
+
   @override
   EmpleadoBuilder build(String nombre, String dni, String cargo,ElementoEmpresa? DepSuperior) {
     empleado = Empleado.vacio();

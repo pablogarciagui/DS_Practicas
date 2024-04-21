@@ -2,14 +2,14 @@ import 'package:ejercicio_grupal/Model/EmpleadoMedioTiempoBuilder.dart';
 import 'package:ejercicio_grupal/Model/EmpleadoTiempoCompletoBuilder.dart';
 import 'package:ejercicio_grupal/Model/TipoBuilder.dart';
 
-import 'empleadoBuilder.dart';
-import 'elementoEmpresa.dart';
+import 'EmpleadoBuilder.dart';
+import 'ElementoEmpresa.dart';
 import 'Departamento.dart';
 
 class Director {
   late EmpleadoBuilder builder;
   late List<ElementoEmpresa> empresa;
-  ElementoEmpresa? seleccionado = null;
+  ElementoEmpresa? seleccionado;
 
   Director(EmpleadoBuilder builder)
   {
@@ -27,9 +27,9 @@ class Director {
   }
 
   void addDepartamento(String nombre, ElementoEmpresa? superior){
-    if(seleccionado == null)
+    if(seleccionado == null) {
       empresa.add(Departamento(nombre, null));
-    else{
+    } else{
       Departamento(nombre, superior);
     }
   }
@@ -83,6 +83,8 @@ class Director {
   List<ElementoEmpresa>? getElementosSubdepartamento(ElementoEmpresa e){
     if(e.getSuperior() != null){
       return e.getElementos();
+    }else{
+      return null;
     }
   }
 

@@ -1,4 +1,3 @@
-import 'empleado.dart';
 
 abstract class ElementoEmpresa {
 
@@ -16,6 +15,7 @@ abstract class ElementoEmpresa {
 
   String mostrarJerarquia();
 
+  @override
   String toString();
 
   ElementoEmpresa? getSuperior();

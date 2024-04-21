@@ -1,8 +1,8 @@
 import 'package:ejercicio_grupal/Model/Departamento.dart';
-import 'package:ejercicio_grupal/Model/director.dart';
+import 'package:ejercicio_grupal/Model/Director.dart';
 import 'package:ejercicio_grupal/Widgets/EmpleadoWidget.dart';
-import 'package:ejercicio_grupal/Model/elementoEmpresa.dart';
-import 'package:ejercicio_grupal/Model/empleado.dart';
+import 'package:ejercicio_grupal/Model/ElementoEmpresa.dart';
+import 'package:ejercicio_grupal/Model/Empleado.dart';
 import 'package:flutter/material.dart';
 
 class ListaElementosWidget extends StatefulWidget {

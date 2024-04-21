@@ -1,4 +1,4 @@
-import 'package:ejercicio_grupal/Model/empleado.dart';
+import 'package:ejercicio_grupal/Model/Empleado.dart';
 import 'package:flutter/material.dart';
 
 

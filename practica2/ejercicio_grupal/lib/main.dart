@@ -1,9 +1,7 @@
 import 'package:ejercicio_grupal/Model/EmpleadoTiempoCompletoBuilder.dart';
 import 'package:ejercicio_grupal/Model/TipoBuilder.dart';
 import 'package:ejercicio_grupal/Widgets/ListaElementosWidget.dart';
-import 'package:ejercicio_grupal/Model/director.dart';
-import 'package:ejercicio_grupal/Model/empleado.dart';
-import 'package:ejercicio_grupal/Model/empleadoBuilder.dart';
+import 'package:ejercicio_grupal/Model/Director.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';

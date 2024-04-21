@@ -1,5 +1,4 @@
-import 'elementoEmpresa.dart';
-import 'empleado.dart';
+import 'ElementoEmpresa.dart';
 
 class Departamento extends ElementoEmpresa {
   String nombre = '';
