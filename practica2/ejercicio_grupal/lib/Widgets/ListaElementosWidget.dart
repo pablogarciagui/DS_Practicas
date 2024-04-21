@@ -1,8 +1,8 @@
-import 'package:ejercicio_grupal/Model/Departamento.dart';
 import 'package:ejercicio_grupal/Model/Director.dart';
+import 'package:ejercicio_grupal/Model/Empleado.dart';
 import 'package:ejercicio_grupal/Widgets/EmpleadoWidget.dart';
 import 'package:ejercicio_grupal/Model/ElementoEmpresa.dart';
-import 'package:ejercicio_grupal/Model/Empleado.dart';
+
 import 'package:flutter/material.dart';
 
 class ListaElementosWidget extends StatefulWidget {
@@ -31,27 +31,41 @@ class _ListaElementosWidget extends State<ListaElementosWidget> {
     return ListView.builder(
         itemCount: widget.listElems.length,
         shrinkWrap: true,
+        padding: const EdgeInsets.all(10),
         itemBuilder: (BuildContext context, int index) {
-          return ListTile(
-            leading: Checkbox(
-              onChanged: (bool? value) {
-                widget.director
-                    .setElementoSeleccionado(widget.listElems[index]);
-                widget.callback();
-              },
-              value: widget.listElems[index] == widget.director.seleccionado
-                  ? true
-                  : false,
+          return Padding(
+            padding: const EdgeInsets.only(
+              top: 5,
             ),
-            title: Text(widget.listElems[index].toString()),
-            subtitle: widget.listElems[index] is Empleado
-                ? EmpleadoWidget(empleado: widget.listElems[index] as Empleado)
-                : ListaElementosWidget(
-                    director: widget.director,
-                    listElems: (widget.listElems[index] as Departamento)
-                        .getElementos(),
-                    callback: callback,
-                  ),
+            child: ListTile(
+              tileColor:
+                  widget.director.puedeTenerHijos(widget.listElems[index])
+                      ? (Theme.of(context).primaryColorLight).withOpacity(0.25)
+                      : Theme.of(context).canvasColor.withOpacity(0.25),
+              shape: RoundedRectangleBorder(
+                side: const BorderSide(color: Colors.grey, width: 1),
+                borderRadius: BorderRadius.circular(5),
+              ),
+              leading: Checkbox(
+                onChanged: (bool? value) {
+                  widget.director
+                      .setElementoSeleccionado(widget.listElems[index]);
+                  widget.callback();
+                },
+                value: widget.director.estaSeleccionado(widget.listElems[index])
+                    ? true
+                    : false,
+              ),
+              title: Text(widget.listElems[index].toString()),
+              subtitle: widget.director.puedeTenerHijos(widget.listElems[index])
+                  ? ListaElementosWidget(
+                      director: widget.director,
+                      listElems: widget.listElems[index].getElementos(),
+                      callback: callback,
+                    )
+                  : EmpleadoWidget(
+                      empleado: widget.listElems[index] as Empleado),
+            ),
           );
         });
   }

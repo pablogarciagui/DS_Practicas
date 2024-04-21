@@ -18,19 +18,21 @@ class Director {
   }
 
   void addEmpleado(String nombre, String dni, String cargo, ElementoEmpresa? superior) {
-    builder.build(nombre, dni, cargo, superior);
-    if(seleccionado == null){
-      empresa.add(builder.getEmpleado());
+    if(nombre.trim().isNotEmpty && dni.trim().isNotEmpty){
+      builder.build(nombre, dni, cargo, superior);
+      if(seleccionado == null){
+        empresa.add(builder.getEmpleado());
+      }
     }
-
-
   }
 
   void addDepartamento(String nombre, ElementoEmpresa? superior){
-    if(seleccionado == null) {
-      empresa.add(Departamento(nombre, null));
-    } else{
-      Departamento(nombre, superior);
+    if(nombre.trim().isNotEmpty){
+      if(seleccionado == null) {
+        empresa.add(Departamento(nombre, null));
+      } else{
+        Departamento(nombre, superior);
+      }
     }
   }
 
@@ -88,4 +90,19 @@ class Director {
     }
   }
 
+  bool puedeTenerHijos(ElementoEmpresa e){
+    if(e is Departamento){
+      return true;
+    }else{
+      return false;
+    }
+  }
+
+  bool estaSeleccionado(ElementoEmpresa e){
+    if (e == seleccionado){
+      return true;
+    } else {
+      return false;
+    }
+  }
 }
