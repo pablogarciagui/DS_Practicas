@@ -35,6 +35,7 @@ void main(){
 
       expect(department1.getElementos(), isNot(contains(childDepartment)));
       expect(department2.getElementos(), contains(childDepartment));
+      expect(childDepartment.getSuperior(), equals(department2));
     });
 
     test('Añadir Empleado perteneciente a un Departamento a otro',(){
@@ -47,6 +48,7 @@ void main(){
 
       expect(department1.getElementos(), isNot(contains(employee)));
       expect(department2.getElementos(), contains(employee));
+      expect(employee.getSuperior(), equals(department2));
     });
 
     test('Añadir Departamento a Empleado',(){
