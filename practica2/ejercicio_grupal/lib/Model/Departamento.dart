@@ -18,7 +18,13 @@ class Departamento extends ElementoEmpresa {
   @override
   void addElementoEmpresa(ElementoEmpresa elemento) {
     // TODO: implement addElementoEmpresa
+    ElementoEmpresa? sup = elemento.getSuperior();
+    if(sup!=null){   //Pertenece a otro departamento, hay que eliminarlo
+      sup.getElementos().remove(elemento);
+    }
     elementos.add(elemento);
+    elemento.cambiarSuperior(this);
+
   }
 
   @override

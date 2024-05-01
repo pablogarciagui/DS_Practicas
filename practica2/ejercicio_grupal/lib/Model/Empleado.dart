@@ -7,9 +7,7 @@ class Empleado extends ElementoEmpresa {
   String tipoContrato = '';
   ElementoEmpresa? DepSuperior;
 
-  Empleado.vacio(){
-
-  }
+  Empleado.vacio();
 
   Empleado(nombre, String dni, String cargo, String tipoContrato,
       ElementoEmpresa? superior) {
@@ -66,7 +64,7 @@ class Empleado extends ElementoEmpresa {
 
   @override
   void cambiarSuperior(ElementoEmpresa? nuevoSuperior) {
-    throw UnimplementedError();
+    this.DepSuperior = nuevoSuperior;
   }
 
   @override
