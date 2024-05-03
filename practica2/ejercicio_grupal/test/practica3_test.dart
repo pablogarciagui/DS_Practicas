@@ -70,8 +70,4 @@ void main(){
 
   });
 
-  group('Añadir a Departamento', (){
-
-  });
-
 }
