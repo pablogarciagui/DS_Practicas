@@ -44,9 +44,6 @@ void main(){
       expect(childDepartment.getSuperior(), equals(department2));
     });
 
-
-
-
     test('Añadir Empleado perteneciente a un Departamento a otro',(){
       department1.addElementoEmpresa(employee);
       department2.addElementoEmpresa(employee);
@@ -67,6 +64,9 @@ void main(){
       expect(employee.getSuperior(), equals(department1));
     });
 
+    test('Añadir Departamento a sí mismo',(){
+      expect(() =>department1.addElementoEmpresa(department1), throwsUnimplementedError);
+    });
 
   });
 

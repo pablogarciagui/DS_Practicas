@@ -22,9 +22,8 @@ class Departamento extends ElementoEmpresa {
     if(sup!=null){   //Pertenece a otro departamento, hay que eliminarlo
       sup.getElementos().remove(elemento);
     }
-    elementos.add(elemento);
     elemento.cambiarSuperior(this);
-
+    elementos.add(elemento);
   }
 
   @override
@@ -44,7 +43,12 @@ class Departamento extends ElementoEmpresa {
 
   @override
   void cambiarSuperior(ElementoEmpresa? nuevoSuperior) {
-    this.DepSuperior = nuevoSuperior;
+    if(nuevoSuperior == this){
+      throw UnimplementedError();
+    }
+    else{
+      this.DepSuperior = nuevoSuperior;
+    }
   }
 
   @override
