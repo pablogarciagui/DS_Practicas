@@ -1,0 +1,100 @@
+\documentclass{article}
+
+% Language setting
+% Replace `english' with e.g. `spanish' to change the document language
+\usepackage[spanish]{babel}
+
+% Set page size and margins
+% Replace `letterpaper' with `a4paper' for UK/EU standard size
+\usepackage[letterpaper,top=2cm,bottom=2cm,left=3cm,right=3cm,marginparwidth=1.75cm]{geometry}
+
+% Useful packages
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage[colorlinks=true, allcolors=blue]{hyperref}
+\usepackage{array} % required for text wrapping in tables
+
+\title{Memoria de la Práctica 3}
+\author{You}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Your abstract.
+\end{abstract}
+
+\section{Introduction}
+
+Your introduction goes here! Simply start writing your document and use the Recompile button to view the updated PDF preview. Examples of commonly used commands and features are listed below, to help you get started.
+
+Once you're familiar with the editor, you can find various project settings in the Overleaf menu, accessed via the button in the very top left of the editor. To view tutorials, user guides, and further documentation, please visit our \href{https://www.overleaf.com/learn}{help library}, or head to our plans page to \href{https://www.overleaf.com/user/subscription/plans}{choose your plan}.
+
+\section{Planificación de las pruebas del sistema}
+
+Las pruebas ideadas para comprobar el funcionamiento de la aplicación son las siguientes:
+
+\begin{enumerate}
+    \item Añadir empleado a empleado
+    \item Añadir departamento a departamento
+    \item Añadir empleado de mismos datos en varios departamentos
+    \item Añadir departamento de mismos datos en varios departamentos
+    \item Añadir departamento a empleado
+    \item Añadir empleado a departamento
+    \item Añadir empleado o departamento con datos parciales
+    \item Añadir empleado fuera de departamento
+    \item Eliminar elemento
+    \item Eliminar bloque completo
+    \item Eliminar con nada seleccionado
+    \item Eliminar bloque elimina bien lo de dentro
+\end{enumerate}
+
+\section{Análisis de pruebas}
+
+
+\begin{table}
+    \centering
+    \begin{tabular}{|>{\raggedright\arraybackslash}p{0.33\linewidth}|>{\raggedright\arraybackslash}p{0.33\linewidth}|>{\raggedright\arraybackslash}p{0.33\linewidth}|} \hline 
+        \textbf{Elemento a probar} & \textbf{Condiciones} & \textbf{Datos requeridos}\\ \hline 
+        Añadir empleado a empleado &  Tener 1 empleado creado& Contenido de sus arrays “elementos” respectivos después de intentar realizar la acción\\ \hline
+        Añadir departamento a si mismo &  Tener 1 departamento creado& Contenido de sus arrays “elementos” respectivos después de intentar realizar la acción\\ \hline 
+        Añadir departamento a departamento &  Tener 1 departamento creado& Contenido de sus arrays “elementos” respectivos después de intentar realizar la acción\\ \hline 
+        Añadir empleado de mismos datos en varios departamentos &  Tener varios departamentos creados& Contenido de sus arrays “elementos” respectivos después de intentar realizar la acción\\ \hline 
+        Añadir departamento de mismos datos en varios departamentos &  Tener varios departamentos creados& Contenido de sus arrays “elementos” respectivos después de intentar realizar la acción\\ \hline 
+        Añadir departamento a empleado &  Tener 1 empleado creado& Contenido de sus arrays “elementos” respectivos después de intentar realizar la acción\\ \hline 
+        Añadir empleado a departamento &  Tener 1 departamento creado& Contenido de sus arrays “elementos” respectivos después de intentar realizar la acción\\ \hline 
+        Añadir empleado o departamento con datos parciales &  ---& ---\\ \hline 
+        Añadir empleado fuera de departamento &  ---& ---\\ \hline 
+        Eliminar elemento &  Tener creado al menos 1 elemento& Contenido de sus arrays “elementos” respectivos después de intentar realizar la acción\\ \hline 
+        Eliminar bloque completo &  Tener creado al menos 1 departamento que, a su vez, tiene agregado como mínimo 1 departamento o 1 empleado& Contenido de sus arrays “elementos” respectivos después de intentar realizar la acción\\ \hline 
+        Eliminar con nada seleccionado &  ---& ---\\ \hline 
+        Eliminar bloque elimina bien lo de dentro &  Tener creado al menos 1 departamento que, a su vez, tiene agregado como mínimo 1 departamento o 1 empleado& Contenido de sus arrays “elementos” respectivos después de intentar realizar la acción\\ \hline
+    \end{tabular}
+    \caption{Caption}
+    \label{tab:my_label}
+\end{table}
+
+\section{Diseño de pruebas}
+
+\begin{table}
+    \centering
+    \begin{tabular}{|>{\raggedright\arraybackslash}p{0.15\linewidth}|>{\raggedright\arraybackslash}p{0.25\linewidth}|>{\raggedright\arraybackslash}p{0.25\linewidth}|>{\raggedright\arraybackslash}p{0.35\linewidth}|} \hline 
+        \textbf{Casos de prueba} & \textbf{Entornos de prueba} & \textbf{Datos de prueba} & \textbf{Trazabilidad}\\ \hline 
+         Añadir empleado a empleado&  Ejecución normal del programa. No necesita herramientas adicionales&  Elemento Empleado al que se le intenta añadir un empleado, dentro de “elementos”&Aparece un nuevo error de tipo "UnimplementedError"\\ \hline 
+         Añadir departamento a departamento&  Ejecución normal del programa. No necesita herramientas adicionales&  Elemento Departamento al que se le intenta añadir un departamento, dentro de “elementos”&“elementos” del departamento contiene un nuevo departamento, cuyo padre es el departamento donde queríamos incluirlo\\ \hline 
+         Añadir empleado de mismos datos en varios departamentos&  Ejecución normal del programa. No necesita herramientas adicionales&  Elementos Departamento a los que se le intenta añadir un empleado, dentro de “elementos”&“elementos” del primer departamento ahora no contiene al empleado, mientras que “elementos” del segundo departamento ahora sí lo contiene\\ \hline 
+         Añadir departamento de mismos datos en varios departamentos&  Ejecución normal del programa. No necesita herramientas adicionales&  Elementos Departamento a los que se le intenta añadir un departamento, dentro de “elementos”&“elementos” del primer departamento ahora no contiene al departamento, mientras que “elementos” del segundo departamento ahora sí lo contiene\\ \hline 
+         Añadir departamento a empleado&  Ejecución normal del programa. No necesita herramientas adicionales&  Elemento Empleado al que se le intenta añadir un empleado, dentro de “elementos”&Aparece un nuevo error de tipo "UnimplementedError"\\ \hline 
+         Añadir empleado a departamento&  Ejecución normal del programa. No necesita herramientas adicionales&  Elemento Departamento al que se le intenta añadir un empleado, dentro de “elementos”&“elementos” contiene un nuevo empleado, cuyo padre es el departamento donde queríamos incluirlo\\ \hline 
+         Añadir empleado o departamento con datos parciales&  Ejecución normal del programa. No necesita herramientas adicionales&  Elemento Empleado o Elemento Departamento al que se le intenta añadir al sistema sin todos los campos llenos&Aparece un mensaje por pantalla que informa al usuario la necesidad de completar los datos faltantes\\ \hline 
+         Añadir empleado fuera de departamento&  Ejecución normal del programa. No necesita herramientas adicionales&  Añadir un Elemento Empleado al sistema sin tener asociado ningún Elemento Departamento&“elementos” contiene un empleado que no tiene asociado ningún padre\\ \hline 
+         Eliminar elemento&  Ejecución normal del programa. No necesita herramientas adicionales&  Eliminar un Elemento del sistema&Aparece un mensaje por pantalla que informa al usuario que X Elemento ha sido borrado con éxito\\ \hline 
+         Eliminar bloque completo&  Ejecución normal del programa. No necesita herramientas adicionales&  Eliminar un Elemento Departamento que tenga subdepartamentos y/o empleados&Aparece un mensaje de confirmación antes de realizar la acción de borrado y posteriormente un mensaje que muestre que el Departamento X ha sido borrado con éxito\\ \hline 
+         Eliminar con nada seleccionado&  Ejecución normal del programa. No necesita herramientas adicionales&  Intentar eliminar sin seleccionar ningún elemento&Aparece un mensaje de advertencia indicando que no hay elementos seleccionados\\ \hline 
+         Eliminar bloque elimina bien lo de dentro&  Ejecución normal del programa. No necesita herramientas adicionales&  Eliminar todos los “elementos” de todos los Departamentos y Empleados del bloque seleccionado&Verificar que los elementos fuera del bloque seleccionado no se ven afectados y que todos los elementos dentro del bloque se eliminan correctamente\\ \hline
+    \end{tabular}
+    \caption{Caption}
+    \label{tab:my_label}
+\end{table}
+
+\end{document}
