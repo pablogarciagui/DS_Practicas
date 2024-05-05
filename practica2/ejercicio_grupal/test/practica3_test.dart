@@ -9,27 +9,33 @@ import 'package:ejercicio_grupal/Model/Departamento.dart';
 
 void main(){
 
-  group('Tests Práctica 3', (){
-    test('Añadir empleado a empleado', (){
-      Empleado employee = Empleado('John Doe', '12345678A', 'Software Engineer', 'Tiempo Completo', null);
-      Empleado subEmployee = Empleado('Jane Doe', '98765432B', 'Software Engineer', 'Tiempo Completo', null);
+  group('Test Práctica 3', (){
 
+    late Empleado employee;
+    late Empleado subEmployee;
+    late Departamento department1;
+    late Departamento department2;
+
+    setUp(() {
+      employee = Empleado('John Doe', '12345678A', 'Software Engineer', 'Tiempo Completo', null);
+      subEmployee = Empleado('Jane Doe', '98765432B', 'Software Engineer', 'Tiempo Completo', null);
+      department1 = Departamento('Department 1', null);
+      department2 = Departamento('Department 2', null);
+    });
+
+    test('Añadir empleado a empleado', (){
       expect(() => employee.addElementoEmpresa(subEmployee), throwsUnimplementedError);
     });
 
     test('Añadir Departamento a Departamento',(){
-      Departamento parentDepartment = Departamento('Parent Department', null);
-      Departamento childDepartment = Departamento('Child Department', null);
 
-      parentDepartment.addElementoEmpresa(childDepartment);
+      department1.addElementoEmpresa(department2);
 
-      expect(parentDepartment.getElementos(), contains(childDepartment));
-      expect(childDepartment.getSuperior(), equals(parentDepartment));
+      expect(department1.getElementos(), contains(department2));
+      expect(department2.getSuperior(), equals(department1));
     });
 
     test('Añadir Departamento perteneciente a un Departamento a otro',(){
-      Departamento department1 = Departamento('Department 1', null);
-      Departamento department2 = Departamento('Department 2', null);
       Departamento childDepartment = Departamento('Child Department', null);
 
       department1.addElementoEmpresa(childDepartment);
@@ -40,11 +46,10 @@ void main(){
       expect(childDepartment.getSuperior(), equals(department2));
     });
 
-    test('Añadir Empleado perteneciente a un Departamento a otro',(){
-      Departamento department1 = Departamento('Department 1', null);
-      Departamento department2 = Departamento('Department 2', null);
-      Empleado employee = Empleado('Jane Doe', '98765432B', 'Software Engineer', 'Tiempo Completo', null);
 
+
+
+    test('Añadir Empleado perteneciente a un Departamento a otro',(){
       department1.addElementoEmpresa(employee);
       department2.addElementoEmpresa(employee);
 
@@ -54,23 +59,19 @@ void main(){
     });
 
     test('Añadir Departamento a Empleado',(){
-      Departamento department = Departamento('Department', null);
-      Empleado employee = Empleado('Jane Doe', '98765432B', 'Software Engineer', 'Tiempo Completo', null);
-
-      expect(() => employee.addElementoEmpresa(department), throwsUnimplementedError);
+      expect(() => employee.addElementoEmpresa(department1), throwsUnimplementedError);
     });
 
     test('Añadir Empleado a Departamento',(){
-      Departamento department = Departamento('Department', null);
-      Empleado employee = Empleado('John Doe', '12345678A', 'Software Engineer', 'Tiempo Completo', null);
+      department1.addElementoEmpresa(employee);
 
-      department.addElementoEmpresa(employee);
-
-      expect(department.getElementos(), contains(employee));
-      expect(employee.getSuperior(), equals(department));
+      expect(department1.getElementos(), contains(employee));
+      expect(employee.getSuperior(), equals(department1));
     });
 
+
   });
+
 
   group('Tests Práctica 3, segundo grupo', (){
 
@@ -108,6 +109,9 @@ void main(){
     test('Eliminar bloque elimina bien lo de dentro',(){
 
     });
+
+  group('Añadir a Departamento', (){
+
 
   });
 
