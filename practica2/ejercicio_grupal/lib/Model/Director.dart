@@ -21,7 +21,9 @@ class Director {
     bool elemento_aceptable = false;
     if(elemento.toString().trim().isNotEmpty){
       if (elemento is Empleado) {
-        if(elemento.getDni().trim().isNotEmpty && elemento.getTipoContrato().trim().isNotEmpty && elemento.getCargo().trim().isNotEmpty){
+        if(elemento.getDni().trim().isNotEmpty
+            && elemento.getTipoContrato().trim().isNotEmpty
+            && elemento.getCargo().trim().isNotEmpty){
           elemento_aceptable = true;
         }
       } else {
@@ -37,7 +39,7 @@ class Director {
         }
         empresa.add(elemento);
       } else if (seleccionado is Departamento){
-        // addElementoEmpresa ya se encarga de cambiarle el superior a él si hiciera falta
+        // addElementoEmpresa del departamento ya se encarga de cambiarle el superior a él si hiciera falta
         seleccionado?.addElementoEmpresa(elemento);
       }
     }

@@ -73,7 +73,6 @@ void main() {
     late Director director;
     late Departamento departmentoA;
     late Departamento departmentoB;
-    late Departamento departmentoC;
     late Empleado empleado1;
     late Empleado empleado2;
     late Empleado empleado3;
@@ -82,7 +81,6 @@ void main() {
       director = Director(EmpleadoTiempoCompletoBuilder(null));
       departmentoA = Departamento('A', null);
       departmentoB = Departamento('B', null);
-      departmentoC = Departamento('C', null);
       empleado1 =
           Empleado('1', '111111111L', 'Empleado', 'Tiempo Completo', null);
       empleado2 =
@@ -101,14 +99,12 @@ void main() {
       director.addElementoEmpresa(empleado2);
       director.setElementoSeleccionado(null);
       /*
-      Estructura
+      Estructura de la empresa
         A
         -> B
         -> -> 2
         -> 1
         3
-
-        Departamento C son objetos por su cuenta
        */
     });
 
