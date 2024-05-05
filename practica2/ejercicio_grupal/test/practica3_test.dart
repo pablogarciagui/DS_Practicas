@@ -1,4 +1,6 @@
 
+import 'package:ejercicio_grupal/Model/Director.dart';
+import 'package:ejercicio_grupal/Model/EmpleadoMedioTiempoBuilder.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ejercicio_grupal/main.dart';
@@ -69,4 +71,44 @@ void main(){
     });
 
   });
+
+  group('Tests Práctica 3, segundo grupo', (){
+
+    // Crear lista para
+    Departamento departamento = Departamento("A", null);
+    departamento.addElementoEmpresa(Departamento("subA", departamento));
+    departamento.getElementos()[0].addElementoEmpresa(Empleado("Carlos", "1234567", "Becario", "tipoContrato", departamento.getElementos()[0]));
+    Director director = Director(EmpleadoMedioTiempoBuilder(null));
+    director.addDepartamento("A", null);
+    director.setElementoSeleccionado(director.getElemento(0));
+    director.addDepartamento("B", null);
+
+    test('Añadir empleado o departamento con datos parciales', (){
+
+    });
+
+    test('Añadir empleado fuera de departamento',(){
+
+    });
+
+    test('Eliminar elemento',(){
+
+    });
+
+    test('Eliminar bloque completo',(){
+
+    });
+
+    test('Eliminar con nada seleccionado',(){
+      director.setElementoSeleccionado(null);
+
+      expect(director.toString());
+    });
+
+    test('Eliminar bloque elimina bien lo de dentro',(){
+
+    });
+
+  });
+
 }

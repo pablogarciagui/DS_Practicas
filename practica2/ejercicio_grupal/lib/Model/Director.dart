@@ -73,7 +73,7 @@ class Director {
     return seleccionado!;
   }
 
-  void setElementoSeleccionado(ElementoEmpresa e){
+  void setElementoSeleccionado(ElementoEmpresa? e){
     if(seleccionado == e){
       seleccionado = null;
     } else{
