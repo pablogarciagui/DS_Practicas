@@ -1,15 +1,20 @@
 import 'ElementoEmpresa.dart';
 
 class Empleado extends ElementoEmpresa {
-  String nombre = '';
-  String dni = '';
-  String cargo = '';
-  String tipoContrato = '';
+  String? nombre;
+  String? dni;
+  String? cargo;
+  String? tipoContrato;
   ElementoEmpresa? DepSuperior;
+
+  // Para conexion con base de datos
+  int? dep_superior;
+  String? usuario;
 
   Empleado.vacio();
 
-  Empleado(nombre, String dni, String cargo, String tipoContrato,
+  /*
+  Empleado(String nombre, String dni, String cargo, String tipoContrato,
       ElementoEmpresa? superior) {
     this.nombre = nombre;
     this.dni = dni;
@@ -19,15 +24,17 @@ class Empleado extends ElementoEmpresa {
       DepSuperior = superior;
       DepSuperior?.addElementoEmpresa(this);
     }
-  }
+  }*/
+
+  Empleado({this.nombre, this.dni, this.cargo, this.tipoContrato, this.DepSuperior, this.dep_superior, this.usuario});
 
   @override
   String mostrarJerarquia() {
     String string = "Empleado:\n";
-    string += "\tNombre: " + this.nombre + " \n";
-    string += "\tDNI: " + this.dni + " \n";
-    string += "\tCargo: " + this.cargo + " \n";
-    string += "\tContrato actual: " + this.tipoContrato + " \n";
+    string += "\tNombre: " + this.nombre! + " \n";
+    string += "\tDNI: " + this.dni! + " \n";
+    string += "\tCargo: " + this.cargo! + " \n";
+    string += "\tContrato actual: " + this.tipoContrato! + " \n";
     return string;
   }
 
@@ -74,7 +81,7 @@ class Empleado extends ElementoEmpresa {
 
   @override
   String toString() {
-    String s = this.nombre;
+    String s = this.nombre!;
     return s;
   }
 
@@ -82,13 +89,13 @@ class Empleado extends ElementoEmpresa {
     return null;
   }
 
-  String getDni(){
+  String? getDni(){
     return dni;
   }
-  String getTipoContrato(){
+  String? getTipoContrato(){
     return tipoContrato;
   }
-  String getCargo(){
+  String? getCargo(){
     return cargo;
   }
   @override
@@ -101,5 +108,28 @@ class Empleado extends ElementoEmpresa {
   @override
   void delete() {
     DepSuperior = null;
+  }
+
+  factory Empleado.fromJson(Map<String, dynamic> json) {
+    return Empleado(
+      nombre: json['nombre'] as String?,
+      dni: json['id'] as String?,
+      cargo: json['cargo'] as String?,
+      tipoContrato: json['contrato'] as String?,
+      DepSuperior: null,
+      dep_superior: json['dep_superior'] as int?,
+      usuario: json['usuario'] as String?,
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      if (dni != null) 'dni': dni,
+      'nombre': nombre,
+      'cargo': cargo,
+      'contrato': tipoContrato,
+      'dep_superior': dep_superior,
+      'usuario': usuario
+    };
   }
 }
