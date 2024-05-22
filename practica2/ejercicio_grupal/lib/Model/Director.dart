@@ -19,11 +19,11 @@ class Director {
 
   void addElementoEmpresa(ElementoEmpresa elemento) {
     bool elemento_aceptable = false;
-    if(elemento.toString().trim().isNotEmpty){
+    if (elemento.toString().trim().isNotEmpty) {
       if (elemento is Empleado) {
-        if(elemento.getDni().trim().isNotEmpty
-            && elemento.getTipoContrato().trim().isNotEmpty
-            && elemento.getCargo().trim().isNotEmpty){
+        if (elemento.getDni().trim().isNotEmpty &&
+            elemento.getTipoContrato().trim().isNotEmpty &&
+            elemento.getCargo().trim().isNotEmpty) {
           elemento_aceptable = true;
         }
       } else {
@@ -31,14 +31,14 @@ class Director {
       }
     }
 
-    if(elemento_aceptable){
-      if(seleccionado == null){
-        if(elemento.getSuperior() != null){
+    if (elemento_aceptable) {
+      if (seleccionado == null) {
+        if (elemento.getSuperior() != null) {
           elemento.getSuperior()?.removeElementoEmpresa(elemento);
           elemento.cambiarSuperior(null);
         }
         empresa.add(elemento);
-      } else if (seleccionado is Departamento){
+      } else if (seleccionado is Departamento) {
         // addElementoEmpresa del departamento ya se encarga de cambiarle el superior a él si hiciera falta
         seleccionado?.addElementoEmpresa(elemento);
       }
@@ -47,13 +47,17 @@ class Director {
 
   Empleado addEmpleado(
       String nombre, String dni, String cargo, ElementoEmpresa? superior) {
-    if (nombre.trim().isNotEmpty && dni.trim().isNotEmpty && cargo.trim().isNotEmpty) {
+    Empleado e = Empleado.vacio();
+    if (nombre.trim().isNotEmpty &&
+        dni.trim().isNotEmpty &&
+        cargo.trim().isNotEmpty) {
       builder.build(nombre, dni, cargo, superior);
       if (seleccionado == null) {
-        empresa.add(builder.getEmpleado());
+        e = builder.getEmpleado();
+        empresa.add(e);
       }
     }
-    return builder.getEmpleado();
+    return e;
   }
 
   Departamento? addDepartamento(String nombre, ElementoEmpresa? superior) {
