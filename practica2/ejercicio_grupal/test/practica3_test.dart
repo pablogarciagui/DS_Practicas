@@ -1,7 +1,6 @@
 import 'package:ejercicio_grupal/Model/Director.dart';
 import 'package:ejercicio_grupal/Model/EmpleadoBuilder.dart';
 import 'package:ejercicio_grupal/Model/EmpleadoTiempoCompletoBuilder.dart';
-
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ejercicio_grupal/Model/Empleado.dart';
 import 'package:ejercicio_grupal/Model/Departamento.dart';
@@ -12,7 +11,6 @@ void main() {
     late Director director;
     late EmpleadoBuilder builder;
     late Empleado employee;
-    late Empleado subEmployee;
     late Departamento department1;
     late Departamento department2;
 
@@ -32,6 +30,7 @@ void main() {
     });
 
     test('Añadir Departamento a Departamento', () async {
+      director.seleccionado = department1;
       Departamento? childDepartment = director.addDepartamento('Child Department', department1);
 
       expect(department1.getElementos(), contains(childDepartment));
@@ -39,13 +38,15 @@ void main() {
     });
 
     test('Añadir Departamento perteneciente a un Departamento a otro', () async {
-      late Departamento? childDepartment;
-      childDepartment = director.addDepartamento('Child Department', department1);
-      childDepartment = director.addDepartamento('Child Department', department2);
+      late Departamento childDepartment = Departamento('Child Department', department1);
+      director.seleccionado = department1;
+      director.addElementoEmpresa(childDepartment);
+      director.seleccionado = department2;
+      director.addElementoEmpresa(childDepartment);
 
       expect(department1.getElementos(), isNot(contains(childDepartment)));
       expect(department2.getElementos(), contains(childDepartment));
-      expect(childDepartment?.getSuperior(), equals(department2));
+      expect(childDepartment.getSuperior(), equals(department2));
     });
     test('Añadir Empleado perteneciente a un Departamento a otro', () async {
       late Empleado subEmployee;
@@ -54,25 +55,28 @@ void main() {
       subEmployee = director.addEmpleado('Jane Doe', '98765432B',
           'Software Engineer', department2);
 
-      expect(department1.getElementos(), isNot(contains(employee)));
-      expect(department2.getElementos(), contains(employee));
-      expect(employee.getSuperior(), equals(department2));
+      expect(department1.getElementos(), isNot(contains(subEmployee)));
+      expect(department2.getElementos(), contains(subEmployee));
+      expect(subEmployee.getSuperior(), equals(department2));
     });
 
     test('Añadir Departamento a Empleado', () async {
-      expect(() async => employee.addElementoEmpresa(department1),
+      director.seleccionado = employee;
+      expect(() async => director.addDepartamento('Department 1', employee),
           throwsUnimplementedError);
     });
 
     test('Añadir Empleado a Departamento', () async {
-      department1.addElementoEmpresa(employee);
-
-      expect(department1.getElementos(), contains(employee));
-      expect(employee.getSuperior(), equals(department1));
+      late Empleado subEmployee;
+      subEmployee = director.addEmpleado('Jane Doe', '98765432B',
+          'Software Engineer', department1);
+      expect(department1.getElementos(), contains(subEmployee));
+      expect(subEmployee.getSuperior(), equals(department1));
     });
 
     test('Añadir Departamento a sí mismo', () async {
-      expect(() async => department1.addElementoEmpresa(department1),
+      director.seleccionado = department1;
+      expect(() async => director.addElementoEmpresa(department1),
           throwsUnimplementedError);
     });
   });
@@ -117,11 +121,9 @@ void main() {
     });
 
     test('Añadir empleado o departamento con datos parciales', () async {
-      Departamento departmentIncompleto = Departamento('', null);
-      Empleado empleadoIncompleto =
-          Empleado('', '', '', 'Tiempo Completo', null);
-      director.addElementoEmpresa(departmentIncompleto);
-      director.addElementoEmpresa(empleadoIncompleto);
+      Departamento? departmentIncompleto = director.addDepartamento('', null);
+      Empleado empleadoIncompleto = director.addEmpleado('', '', '', null);
+
       expect(director.getEmpresa(), isNot(contains(departmentIncompleto)));
       expect(director.getEmpresa(), isNot(contains(empleadoIncompleto)));
 
@@ -132,12 +134,8 @@ void main() {
     });
 
     test('Añadir empleado fuera de departamento', () async {
-      Empleado empleadoAux =
-          Empleado('Aux', '000000000A', 'Posicion', 'Tiempo Completo', null);
-      director.addElementoEmpresa(empleadoAux);
+      Empleado empleadoAux = director.addEmpleado('Aux', '000000000A', 'Posicion', null);
       expect(director.getEmpresa(), contains(empleadoAux));
-
-      director.addEmpleado('Aux', '000000000A', 'Posicion', null);
       expect(director.getEmpresa().last.toString(), 'Aux');
     });
 
