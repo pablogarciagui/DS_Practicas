@@ -45,7 +45,7 @@ class Director {
     }
   }
 
-  void addEmpleado(
+  Empleado addEmpleado(
       String nombre, String dni, String cargo, ElementoEmpresa? superior) {
     if (nombre.trim().isNotEmpty && dni.trim().isNotEmpty && cargo.trim().isNotEmpty) {
       builder.build(nombre, dni, cargo, superior);
@@ -53,16 +53,23 @@ class Director {
         empresa.add(builder.getEmpleado());
       }
     }
+    return builder.getEmpleado();
   }
 
-  void addDepartamento(String nombre, ElementoEmpresa? superior) {
+  Departamento? addDepartamento(String nombre, ElementoEmpresa? superior) {
+    Departamento dep;
     if (nombre.trim().isNotEmpty) {
       if (seleccionado == null) {
-        empresa.add(Departamento(nombre, null));
+        dep = Departamento(nombre, null);
+        this.addElementoEmpresa(dep);
+        return dep;
       } else {
-        Departamento(nombre, superior);
+        dep = Departamento(nombre, superior);
+        this.addElementoEmpresa(dep);
+        return dep;
       }
     }
+    return null;
   }
 
   void remove() {
