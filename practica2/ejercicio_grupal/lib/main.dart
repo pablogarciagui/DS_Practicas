@@ -1,3 +1,4 @@
+import 'package:ejercicio_grupal/Model/Empleado.dart';
 import 'package:ejercicio_grupal/Model/EmpleadoTiempoCompletoBuilder.dart';
 import 'package:ejercicio_grupal/Model/TipoBuilder.dart';
 import 'package:ejercicio_grupal/Widgets/ListaElementosWidget.dart';
@@ -44,9 +45,22 @@ class _MyHomePageState extends State<MyHomePage> {
   TextEditingController nombre_dep = new TextEditingController();
   final Director director = Director(EmpleadoTiempoCompletoBuilder(null));
 
+  String currentUser = "Carmen";
+  List<String> users = ["Carmen", "Pablo", "Marta", "Jesús"];
+
   @override
   void initState() {
     super.initState();
+    _cargarEmpresaInicial();
+  }
+
+  void _cargarEmpresaInicial() async {
+    try {
+      // await director.cargarEmpresa(currentUser);
+      setState(() {});
+    } catch (e) {
+      print("Problemas cargando: $e");
+    }
   }
 
   @override
@@ -69,11 +83,53 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
+  void removeElementBD() {
+    try {
+      //AQUI VA EL ELIMINAR
+      // await director.remove();
+    } catch (e) {
+      print("Error eliminando elemento: $e");
+    }
+    setState(() {});
+  }
+
+  void addEmpleadoBD() {
+    if (nombre.text.isNotEmpty
+        && dni.text.isNotEmpty
+        && cargo.text.isNotEmpty) {
+      try {
+        // AQUI VA EL AÑADIR
+        //await director.agregar(Empleado(dni: null,
+            //descripcion: text, completada: false, usuario: currentUser));
+        nombre.clear();
+        dni.clear();
+        cargo.clear();
+      } catch (e) {
+        print("Error añadiendo empleado: $e");
+      }
+      setState(() {});
+    }
+  }
+
   void addEmpleado() {
     setState(() {
       director.addEmpleado(
           nombre.text, dni.text, cargo.text, director.seleccionado);
     });
+  }
+
+  void addDepartamentoBD() {
+
+    if (nombre_dep.text.isNotEmpty) {
+      try {
+        //AQUI VA EL AÑADIR
+        //await director.agregar(DIRECTOR);
+        nombre_dep.clear();
+      } catch (e) {
+        print("Error añadiendo departamento: $e");
+      }
+      setState(() {});
+    }
   }
 
   void addDepartamento() {
@@ -91,6 +147,26 @@ class _MyHomePageState extends State<MyHomePage> {
             style: TextStyle(
               color: Theme.of(context).canvasColor,
             )),
+        actions: <Widget>[
+          DropdownButton<String>(
+            value: currentUser,
+            icon: Icon(Icons.arrow_downward),
+            onChanged: (String? newValue) {
+              if (newValue != null && newValue != currentUser) {
+                setState(() {
+                  currentUser = newValue;
+                  _cargarEmpresaInicial();
+                });
+              }
+            },
+            items: users.map<DropdownMenuItem<String>>((String value) {
+              return DropdownMenuItem<String>(
+                value: value,
+                child: Text(value),
+              );
+            }).toList(),
+          ),
+        ],
       ),
       body: Column(
         children: [
