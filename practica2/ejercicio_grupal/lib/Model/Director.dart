@@ -142,4 +142,21 @@ class Director {
       return false;
     }
   }
+
+  // AL CREAR UN DEPARTAMENTO O EMPLEADO, SELE DEBE AÑADIR TAMBIÉN EL ID DE SU SUPERIOR. NO BASTA CON ASIGNARLE EL OBJETO
+
+  // EJECUTAR CADA VEZ QUE SE METAN DATOS DESDE JSON //
+  void asignarSuperiores(){
+    // recorrer recursivamente la estructura comprobando si hay elementos scados de json sin superior
+    // Añade:
+    // - objeto DepSuperior
+    // - id del objeto Dep Superior
+  }
+
+  void asignarHijos(){
+    // recorrer recursivamente la estructura comprobando si hay elementos sacados de json sin hijos
+    // almacena en un multimap id_superior: hijo, hijo...
+    // al encontrar un elemento cuyo id está en el multimap y que tendría que tener hijos pero no los tiene, empieza a añadir los ElementosEmpresa con id asignado a este elemento
+  }
+  /////////////////////////////////////////////////////
 }
