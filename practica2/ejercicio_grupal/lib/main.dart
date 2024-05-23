@@ -134,7 +134,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void addDepartamento() {
     setState(() {
-      director.addDepartamento(nombre_dep.text, director.seleccionado);
+      director.addDepartamento(nombre_dep.text, director.seleccionado,currentUser);
     });
   }
 

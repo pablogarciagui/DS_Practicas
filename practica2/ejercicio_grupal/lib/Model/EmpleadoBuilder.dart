@@ -12,7 +12,7 @@ abstract class EmpleadoBuilder {
     EmpleadoBuilder build(String nombre, String dni, String cargo, ElementoEmpresa? DepSuperior);
 
     Empleado getEmpleado(){
-        return Empleado(empleado.toString(), empleado.getDni(), empleado.getCargo(), empleado.getTipoContrato(), empleado.getSuperior());
+        return Empleado.parametros(empleado.toString(), empleado.getDni(), empleado.getCargo(), empleado.getTipoContrato(), empleado.getSuperior(), empleado.getUsuario());
     }
 
 }

@@ -17,10 +17,10 @@ void main() {
     setUp(() {
       builder = EmpleadoTiempoCompletoBuilder(null);
       director = Director(builder);
-      employee = Empleado('John Doe', '12345678A', 'Software Engineer',
-          'Tiempo Completo', null);
-      department1 = Departamento('Department 1', null);
-      department2 = Departamento('Department 2', null);
+      employee = Empleado.parametros('John Doe', '12345678A', 'Software Engineer',
+          'Tiempo Completo', null, "");
+      department1 = Departamento.parametros('Department 1', null, "",1);
+      department2 = Departamento.parametros('Department 2', null, "",2);
     });
 
     test('Añadir empleado a empleado', () async {
@@ -31,14 +31,14 @@ void main() {
 
     test('Añadir Departamento a Departamento', () async {
       director.seleccionado = department1;
-      Departamento? childDepartment = director.addDepartamento('Child Department', department1);
+      Departamento? childDepartment = director.addDepartamento('Child Department', department1,"");
 
       expect(department1.getElementos(), contains(childDepartment));
       expect(childDepartment?.getSuperior(), equals(department1));
     });
 
     test('Añadir Departamento perteneciente a un Departamento a otro', () async {
-      late Departamento childDepartment = Departamento('Child Department', department1);
+      late Departamento childDepartment = Departamento.parametros('Child Department', department1,"",3);
       director.seleccionado = department1;
       director.addElementoEmpresa(childDepartment);
       director.seleccionado = department2;
@@ -62,7 +62,7 @@ void main() {
 
     test('Añadir Departamento a Empleado', () async {
       director.seleccionado = employee;
-      expect(() async => director.addDepartamento('Department 1', employee),
+      expect(() async => director.addDepartamento('Department 1', employee,""),
           throwsUnimplementedError);
     });
 
@@ -91,14 +91,14 @@ void main() {
 
     setUp(() {
       director = Director(EmpleadoTiempoCompletoBuilder(null));
-      departmentoA = Departamento('A', null);
-      departmentoB = Departamento('B', null);
+      departmentoA = Departamento.parametros('A', null,"",1);
+      departmentoB = Departamento.parametros('B', null,"",2);
       empleado1 =
-          Empleado('1', '111111111L', 'Empleado', 'Tiempo Completo', null);
+          Empleado.parametros('1', '111111111L', 'Empleado', 'Tiempo Completo', null,"");
       empleado2 =
-          Empleado('2', '999999999P', 'Empleado', 'Tiempo Completo', null);
+          Empleado.parametros('2', '999999999P', 'Empleado', 'Tiempo Completo', null,"");
       empleado3 =
-          Empleado('3', '000000000A', 'Empleado', 'Tiempo Completo', null);
+          Empleado.parametros('3', '000000000A', 'Empleado', 'Tiempo Completo', null,"");
 
       director.addElementoEmpresa(departmentoA);
       director.addElementoEmpresa(empleado3);
@@ -121,7 +121,7 @@ void main() {
     });
 
     test('Añadir empleado o departamento con datos parciales', () async {
-      Departamento? departmentIncompleto = director.addDepartamento('', null);
+      Departamento? departmentIncompleto = director.addDepartamento('', null,"");
       Empleado empleadoIncompleto = director.addEmpleado('', '', '', null);
 
       expect(director.getEmpresa(), isNot(contains(departmentIncompleto)));
@@ -129,7 +129,7 @@ void main() {
 
       int n_elementos = director.getEmpresa().length;
       director.addEmpleado("", "", "", null);
-      director.addDepartamento("", null);
+      director.addDepartamento("", null,"");
       expect(director.getEmpresa().length, n_elementos);
     });
 

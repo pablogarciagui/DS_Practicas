@@ -88,14 +88,18 @@ class Empleado extends ElementoEmpresa {
     return null;
   }
 
-  String? getDni(){
-    return dni;
+  String getDni(){
+    return dni ?? "";
   }
-  String? getTipoContrato(){
-    return tipoContrato;
+  String getTipoContrato(){
+    return tipoContrato ?? "";
   }
-  String? getCargo(){
-    return cargo;
+  String getCargo(){
+    return cargo ?? "";
+  }
+
+  String getUsuario(){
+    return usuario ?? "";
   }
   @override
   ElementoEmpresa? getSuperior(){
