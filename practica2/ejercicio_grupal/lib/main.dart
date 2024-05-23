@@ -56,7 +56,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void _cargarEmpresaInicial() async {
     try {
-      // await director.cargarEmpresa(currentUser);
+      //await director.cargarEmpresa(currentUser);
       setState(() {});
     } catch (e) {
       print("Problemas cargando: $e");
@@ -83,24 +83,21 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
-  void removeElementBD() {
+  void removeElementBD() async{
     try {
-      //AQUI VA EL ELIMINAR
-      // await director.remove();
+      //await director.remove();
     } catch (e) {
       print("Error eliminando elemento: $e");
     }
     setState(() {});
   }
 
-  void addEmpleadoBD() {
+  void addEmpleadoBD() async {
     if (nombre.text.isNotEmpty
         && dni.text.isNotEmpty
         && cargo.text.isNotEmpty) {
       try {
-        // AQUI VA EL AÑADIR
-        //await director.agregar(Empleado(dni: null,
-            //descripcion: text, completada: false, usuario: currentUser));
+        await director.addEmpleado(nombre.text,dni.text,cargo.text, director.seleccionado, currentUser);
         nombre.clear();
         dni.clear();
         cargo.clear();
@@ -114,16 +111,15 @@ class _MyHomePageState extends State<MyHomePage> {
   void addEmpleado() {
     setState(() {
       director.addEmpleado(
-          nombre.text, dni.text, cargo.text, director.seleccionado);
+          nombre.text, dni.text, cargo.text, director.seleccionado, currentUser);
     });
   }
 
-  void addDepartamentoBD() {
+  void addDepartamentoBD() async{
 
     if (nombre_dep.text.isNotEmpty) {
       try {
-        //AQUI VA EL AÑADIR
-        //await director.agregar(DIRECTOR);
+        await director.addDepartamento(nombre_dep.text, director.seleccionado,currentUser);
         nombre_dep.clear();
       } catch (e) {
         print("Error añadiendo departamento: $e");

@@ -7,12 +7,13 @@ class EmpleadoTiempoCompletoBuilder extends EmpleadoBuilder{
   EmpleadoTiempoCompletoBuilder(ElementoEmpresa? DepSuperior) : super(DepSuperior);
 
   @override
-  EmpleadoBuilder build(String nombre, String dni, String cargo, ElementoEmpresa? DepSuperior) {
+  EmpleadoBuilder build(String nombre, String dni, String cargo, ElementoEmpresa? DepSuperior, String usuario) {
     empleado = Empleado.vacio();
     empleado.setNombre(nombre);
     empleado.setDni(dni);
     empleado.setCargo(cargo);
     empleado.setTipoContrato("Tiempo Completo");
+    empleado.setUsuario(usuario);
     if (DepSuperior != null) {
       empleado.DepSuperior = DepSuperior;
       empleado.DepSuperior?.addElementoEmpresa(empleado);

@@ -53,6 +53,10 @@ class Empleado extends ElementoEmpresa {
     this.tipoContrato = tipoContrato;
   }
 
+  void setUsuario(String us) {
+    this.usuario = us;
+  }
+
   @override
   void addElementoEmpresa(ElementoEmpresa elemento) {
     throw UnimplementedError();

@@ -46,12 +46,12 @@ class Director {
   }
 
   Empleado addEmpleado(
-      String nombre, String dni, String cargo, ElementoEmpresa? superior) {
+      String nombre, String dni, String cargo, ElementoEmpresa? superior,String usuario) {
     Empleado e = Empleado.vacio();
     if (nombre.trim().isNotEmpty &&
         dni.trim().isNotEmpty &&
         cargo.trim().isNotEmpty) {
-      builder.build(nombre, dni, cargo, superior);
+      builder.build(nombre, dni, cargo, superior,usuario);
       if (seleccionado == null) {
         e = builder.getEmpleado();
         empresa.add(e);

@@ -9,7 +9,7 @@ abstract class EmpleadoBuilder {
         empleado = Empleado.vacio();
     }
 
-    EmpleadoBuilder build(String nombre, String dni, String cargo, ElementoEmpresa? DepSuperior);
+    EmpleadoBuilder build(String nombre, String dni, String cargo, ElementoEmpresa? DepSuperior, String usuario);
 
     Empleado getEmpleado(){
         return Empleado.parametros(empleado.toString(), empleado.getDni(), empleado.getCargo(), empleado.getTipoContrato(), empleado.getSuperior(), empleado.getUsuario());
