@@ -1,5 +1,3 @@
-import 'package:ejercicio_grupal/Model/Empleado.dart';
-
 import 'ElementoEmpresa.dart';
 
 class Departamento extends ElementoEmpresa {
@@ -11,32 +9,29 @@ class Departamento extends ElementoEmpresa {
   String? usuario;
   int? dep_superior;
 
-  Departamento.parametros(String nombre, ElementoEmpresa? superior, String usuario, int? idSuperior) {
+
+  Departamento.parametros(String nombre, ElementoEmpresa? superior, String? usuario, int? idSuperior) {
     this.nombre = nombre;
     elementos = <ElementoEmpresa>[];
     this.usuario = usuario;
 
-    if (superior != null && superior is Departamento) {
+    if (superior != null) {
       DepSuperior = superior;
-      this.dep_superior = superior.id;
+      this.dep_superior = idSuperior;
       DepSuperior?.addElementoEmpresa(this);
     }
   }
 
-  Departamento({this.nombre, this.elementos, this.DepSuperior, this.id, this.usuario, this.dep_superior}){
-  }
+  Departamento({this.nombre, this.elementos, this.DepSuperior, this.id, this.usuario, this.dep_superior});
 
   @override
   void addElementoEmpresa(ElementoEmpresa elemento) {
     ElementoEmpresa? sup = elemento.getSuperior();
-
     if(sup!=null){   //Pertenece a otro departamento, hay que eliminarlo
-      sup.removeElementoEmpresa(elemento);
+      sup.getElementos().remove(elemento);
     }
-    if(sup!=this){
-      elemento.cambiarSuperior(this);
-      elementos?.add(elemento);
-    }
+    elemento.cambiarSuperior(this);
+    elementos!.add(elemento);
   }
 
   @override
@@ -86,7 +81,7 @@ class Departamento extends ElementoEmpresa {
 
   @override
   List<ElementoEmpresa> getElementos() {
-    return elementos ?? [];
+    return elementos!;
   }
 
   @override
@@ -131,7 +126,6 @@ class Departamento extends ElementoEmpresa {
       nombre: json['nombre'] as String?,
       DepSuperior: null,
       usuario: json['usuario'] as String?,
-      dep_superior: json['dep_superior'] as int?
     );
   }
 
@@ -142,16 +136,5 @@ class Departamento extends ElementoEmpresa {
       'nombre': nombre,
       'usuario': usuario
     };
-  }
-
-  @override
-  int? get_superior() {
-    // TODO: implement get_superior
-    return dep_superior;
-  }
-
-  @override
-  int? getId() {
-    return id;
   }
 }

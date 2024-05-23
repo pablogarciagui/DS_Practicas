@@ -8,7 +8,7 @@ class EmpleadoTiempoCompletoBuilder extends EmpleadoBuilder{
   EmpleadoTiempoCompletoBuilder(ElementoEmpresa? DepSuperior) : super(DepSuperior);
 
   @override
-  EmpleadoBuilder build(String nombre, String dni, String cargo, ElementoEmpresa? DepSuperior, String usuario) {
+  EmpleadoBuilder build(String nombre, String dni, String cargo, ElementoEmpresa? DepSuperior, String? usuario) {
     empleado = Empleado.vacio();
     empleado.setNombre(nombre);
     empleado.setDni(dni);

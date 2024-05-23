@@ -7,46 +7,24 @@ import 'ElementoEmpresa.dart';
 import 'Empleado.dart';
 import 'Departamento.dart';
 
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+
 class Director {
   late EmpleadoBuilder builder;
   late List<ElementoEmpresa> empresa;
   ElementoEmpresa? seleccionado;
+  final String apiUrl = "http://localhost:3000/tareas";
+
+  String? usuario;
 
   Director(EmpleadoBuilder builder) {
     this.builder = builder;
     empresa = <ElementoEmpresa>[];
   }
 
+  // ESTA FUNCION DEBERIA ELIMINARSE Y EDITARSE LOS TESTS
   /*
-  void addElementoEmpresa(ElementoEmpresa elemento) {
-    bool elemento_aceptable = false;
-    if (elemento.toString().trim().isNotEmpty) {
-      if (elemento is Empleado) {
-        if (elemento.getDni()!.trim().isNotEmpty &&
-            elemento.getTipoContrato()!.trim().isNotEmpty &&
-            elemento.getCargo()!.trim().isNotEmpty) {
-          elemento_aceptable = true;
-        }
-      } else {
-        elemento_aceptable = true;
-      }
-    }
-
-    if (elemento_aceptable) {
-      if (seleccionado == null) {
-        if (elemento.getSuperior() != null) {
-          elemento.getSuperior()?.removeElementoEmpresa(elemento);
-          elemento.cambiarSuperior(null);
-        }
-        empresa.add(elemento);
-      } else if (seleccionado is Departamento) {
-        // addElementoEmpresa del departamento ya se encarga de cambiarle el superior a él si hiciera falta
-        seleccionado?.addElementoEmpresa(elemento);
-      }
-    }
-  }
-  */
-
   Future<void> addElementoEmpresa(ElementoEmpresa elemento) async {
     bool elemento_aceptable = false;
     if (elemento.toString().trim().isNotEmpty) {
@@ -73,20 +51,34 @@ class Director {
         await seleccionado?.addElementoEmpresa(elemento); 
       }
     }
-  }
+  }*/
 
   Future<Empleado> addEmpleado(
       String nombre, String dni, String cargo, ElementoEmpresa? superior) async {
     Empleado e = Empleado.vacio();
+
     if (nombre.trim().isNotEmpty &&
         dni.trim().isNotEmpty &&
         cargo.trim().isNotEmpty) {
-      await builder.build(nombre, dni, cargo, superior); 
+      builder.build(nombre, dni, cargo, superior, usuario);
       if (seleccionado == null) {
-        e = await builder.getEmpleado(); 
-        await empresa.add(e); 
+        e = builder.getEmpleado();
       }
     }
+
+    final response = await http.post(
+        Uri.parse(apiUrl),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+        body: jsonEncode(e.toJson()),
+    );
+    if (response.statusCode == 201) {
+      empresa.add(Empleado.fromJson(json.decode(response.body)));
+    } else {
+      throw Exception('Failed to add task: ${response.body}');
+    }
+
     return e;
   }
 
@@ -150,6 +142,7 @@ class Director {
         return dep;
       }
     }
+
     return null;
   }
 
@@ -170,8 +163,16 @@ class Director {
   Future<void> remove() async {
     if (seleccionado != null) {
       if (seleccionado?.getSuperior() == null) {
-        empresa.remove(seleccionado);
-        await seleccionado?.delete(); 
+
+        final response = await http.delete(
+          Uri.parse('$apiUrl/${seleccionado.id}'),
+        );
+        if (response.statusCode == 200) {
+          empresa.remove(seleccionado);
+        } else {
+          throw Exception('Failed to delete');
+        }
+
       } else {
         await seleccionado?.getSuperior()?.removeElementoEmpresa(seleccionado);
       }
