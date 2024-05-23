@@ -21,9 +21,9 @@ class Director {
     bool elemento_aceptable = false;
     if (elemento.toString().trim().isNotEmpty) {
       if (elemento is Empleado) {
-        if (elemento.getDni().trim().isNotEmpty &&
-            elemento.getTipoContrato().trim().isNotEmpty &&
-            elemento.getCargo().trim().isNotEmpty) {
+        if (elemento.getDni()!.trim().isNotEmpty &&
+            elemento.getTipoContrato()!.trim().isNotEmpty &&
+            elemento.getCargo()!.trim().isNotEmpty) {
           elemento_aceptable = true;
         }
       } else {
@@ -60,15 +60,22 @@ class Director {
     return e;
   }
 
-  Departamento? addDepartamento(String nombre, ElementoEmpresa? superior) {
+  Departamento? addDepartamento(String nombre, ElementoEmpresa? superior, String usuario) {
     Departamento dep;
     if (nombre.trim().isNotEmpty) {
       if (seleccionado == null) {
-        dep = Departamento(nombre, null);
+        dep = Departamento.parametros(nombre, null, usuario, -1); // añadido lo de usuario y el id del superior. -1 se usa como NULL
+        //dep = Departamento();
         this.addElementoEmpresa(dep);
         return dep;
       } else {
-        dep = Departamento(nombre, superior);
+        if(superior != null && superior is Departamento){
+          dep = Departamento.parametros(nombre, superior, usuario, superior.dep_superior); // añadido lo de usuario y el id del superior
+        }
+        else{
+          dep = Departamento.parametros(nombre, superior, usuario, null); // añadido lo de usuario y el id del superior
+        }
+        //dep = Departamento();
         this.addElementoEmpresa(dep);
         return dep;
       }
@@ -147,20 +154,58 @@ class Director {
     }
   }
 
-  // AL CREAR UN DEPARTAMENTO O EMPLEADO, SELE DEBE AÑADIR TAMBIÉN EL ID DE SU SUPERIOR. NO BASTA CON ASIGNARLE EL OBJETO
+  // Sanear JSON de entrada
 
-  // EJECUTAR CADA VEZ QUE SE METAN DATOS DESDE JSON //
-  void asignarSuperiores(){
-    // recorrer recursivamente la estructura comprobando si hay elementos scados de json sin superior
-    // Añade:
-    // - objeto DepSuperior
-    // - id del objeto Dep Superior
+  Departamento? getDepartamento(int? id){
+    Departamento? departamento;
+
+    for(var elemento in empresa){
+      if(elemento is Departamento && elemento.id == id){
+        departamento = elemento;
+      }
+    }
+
+    return departamento;
   }
 
-  void asignarHijos(){
-    // recorrer recursivamente la estructura comprobando si hay elementos sacados de json sin hijos
-    // almacena en un multimap id_superior: hijo, hijo...
-    // al encontrar un elemento cuyo id está en el multimap y que tendría que tener hijos pero no los tiene, empieza a añadir los ElementosEmpresa con id asignado a este elemento
+  List<ElementoEmpresa>? getHijos(int? id){
+    List<ElementoEmpresa>? hijos;
+
+    for(var elemento in empresa){
+      if(elemento is Empleado && elemento.dep_superior == id){
+        if(hijos == null){
+          hijos = [elemento];
+        }
+        else{
+          hijos.add(elemento);
+        }
+      }
+      else if(elemento is Departamento && elemento.dep_superior == id){
+        if(hijos == null){
+          hijos = [elemento];
+        }
+        else{
+          hijos.add(elemento);
+        }
+      }
+    }
+
+    return hijos;
   }
-  /////////////////////////////////////////////////////
+  
+  // Ejecutar cada vez que se importa un JSON
+  void asignarElementosSuperiores(){
+    for (var elemento in empresa){
+      if(elemento is Empleado && elemento.DepSuperior == null){
+        elemento.DepSuperior = getDepartamento(elemento.dep_superior);
+      }
+      else if(elemento is Departamento && elemento.DepSuperior == null){
+        elemento.DepSuperior = getDepartamento(elemento.dep_superior);
+
+        if(elemento.elementos == null){
+          elemento.elementos = getHijos(elemento.id);
+        }
+      }
+    }
+  }
 }

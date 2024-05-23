@@ -9,16 +9,18 @@ class Departamento extends ElementoEmpresa {
   String? usuario;
   int? dep_superior;
 
-  /*
-  Departamento(String nombre, ElementoEmpresa? superior) {
+
+  Departamento.parametros(String nombre, ElementoEmpresa? superior, String usuario, int? idSuperior) {
     this.nombre = nombre;
     elementos = <ElementoEmpresa>[];
+    this.usuario = usuario;
 
     if (superior != null) {
       DepSuperior = superior;
+      this.dep_superior = idSuperior;
       DepSuperior?.addElementoEmpresa(this);
     }
-  }*/
+  }
 
   Departamento({this.nombre, this.elementos, this.DepSuperior, this.id, this.usuario, this.dep_superior});
 
