@@ -13,18 +13,17 @@ class Empleado extends ElementoEmpresa {
 
   Empleado.vacio();
 
-  /*
-  Empleado(String nombre, String dni, String cargo, String tipoContrato,
-      ElementoEmpresa? superior) {
+  Empleado.parametros(String nombre, String dni, String cargo, String tipoContrato, ElementoEmpresa? superior, String usuario) {
     this.nombre = nombre;
     this.dni = dni;
     this.cargo = cargo;
     this.tipoContrato = tipoContrato;
+    this.usuario = usuario;
     if (superior != null) {
       DepSuperior = superior;
       DepSuperior?.addElementoEmpresa(this);
     }
-  }*/
+  }
 
   Empleado({this.nombre, this.dni, this.cargo, this.tipoContrato, this.DepSuperior, this.dep_superior, this.usuario});
 
