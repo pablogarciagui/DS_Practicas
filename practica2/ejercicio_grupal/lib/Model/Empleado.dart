@@ -1,3 +1,5 @@
+import 'package:ejercicio_grupal/Model/Departamento.dart';
+
 import 'ElementoEmpresa.dart';
 
 class Empleado extends ElementoEmpresa {
@@ -6,6 +8,7 @@ class Empleado extends ElementoEmpresa {
   String? cargo;
   String? tipoContrato;
   ElementoEmpresa? DepSuperior;
+  int? id;
 
   // Para conexion con base de datos
   int? dep_superior;
@@ -22,10 +25,14 @@ class Empleado extends ElementoEmpresa {
     if (superior != null) {
       DepSuperior = superior;
       DepSuperior?.addElementoEmpresa(this);
+      dep_superior = (superior as Departamento ).id;
+    }else{
+      dep_superior = null;
+      DepSuperior = null;
     }
   }
 
-  Empleado({this.nombre, this.dni, this.cargo, this.tipoContrato, this.DepSuperior, this.dep_superior, this.usuario});
+  Empleado({this.nombre, this.dni, this.cargo, this.tipoContrato, this.DepSuperior, this.dep_superior, this.usuario, this.id});
 
   @override
   String mostrarJerarquia() {
@@ -84,7 +91,7 @@ class Empleado extends ElementoEmpresa {
 
   @override
   String toString() {
-    String s = this.nombre!;
+    String s = this.nombre ?? "";
     return s;
   }
 
@@ -120,23 +127,31 @@ class Empleado extends ElementoEmpresa {
   factory Empleado.fromJson(Map<String, dynamic> json) {
     return Empleado(
       nombre: json['nombre'] as String?,
-      dni: json['id'] as String?,
+      dni: json['dni'] as String?,
       cargo: json['cargo'] as String?,
       tipoContrato: json['contrato'] as String?,
       DepSuperior: null,
       dep_superior: json['dep_superior'] as int?,
       usuario: json['usuario'] as String?,
+      id: json['id'] as int?
     );
   }
 
   Map<String, dynamic> toJson() {
     return {
-      if (dni != null) 'dni': dni,
+      if (id != null) 'id':id,
+      'dni':dni,
       'nombre': nombre,
       'cargo': cargo,
       'contrato': tipoContrato,
-      'dep_superior': dep_superior,
+      'dep_superior': this.dep_superior,
       'usuario': usuario
     };
+  }
+
+  @override
+  int? get_superior() {
+    // TODO: implement get_superior
+    return dep_superior;
   }
 }

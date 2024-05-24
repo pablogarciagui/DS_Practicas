@@ -23,4 +23,6 @@ abstract class ElementoEmpresa {
   List<ElementoEmpresa> getElementos();
 
   void delete();
+
+  int? get_superior();
 }

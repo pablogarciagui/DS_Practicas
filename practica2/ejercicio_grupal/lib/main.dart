@@ -1,3 +1,4 @@
+import 'package:ejercicio_grupal/Model/Departamento.dart';
 import 'package:ejercicio_grupal/Model/Empleado.dart';
 import 'package:ejercicio_grupal/Model/EmpleadoTiempoCompletoBuilder.dart';
 import 'package:ejercicio_grupal/Model/TipoBuilder.dart';
@@ -56,7 +57,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void _cargarEmpresaInicial() async {
     try {
-      //await director.cargarEmpresa(currentUser);
+      await director.cargarEmpresa(currentUser);
       setState(() {});
     } catch (e) {
       print("Problemas cargando: $e");
@@ -85,7 +86,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void removeElementBD() async{
     try {
-      //await director.remove();
+      await director.eliminar();
     } catch (e) {
       print("Error eliminando elemento: $e");
     }
@@ -97,7 +98,7 @@ class _MyHomePageState extends State<MyHomePage> {
         && dni.text.isNotEmpty
         && cargo.text.isNotEmpty) {
       try {
-        await director.addEmpleado(nombre.text,dni.text,cargo.text, director.seleccionado, currentUser);
+        await director.agregar(Empleado.parametros(nombre.text, dni.text, cargo.text,"", director.seleccionado, currentUser));
         nombre.clear();
         dni.clear();
         cargo.clear();
@@ -119,7 +120,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
     if (nombre_dep.text.isNotEmpty) {
       try {
-        await director.addDepartamento(nombre_dep.text, director.seleccionado,currentUser);
+        await director.agregar(Departamento.parametros(nombre_dep.text, director.seleccionado,currentUser,null)) ;
         nombre_dep.clear();
       } catch (e) {
         print("Error añadiendo departamento: $e");
@@ -185,7 +186,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     ),
                     const SizedBox(width: 10),
                     ElevatedButton.icon(
-                      onPressed: addDepartamento,
+                      onPressed: addDepartamentoBD,
                       label: const Text('Depart.'),
                       icon: const Icon(Icons.add),
                     ),
@@ -255,7 +256,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     ),
                     const SizedBox(width: 10),
                     ElevatedButton.icon(
-                      onPressed: addEmpleado,
+                      onPressed: addEmpleadoBD,
                       label: const Text("Empleado"),
                       icon: const Icon(Icons.add),
                     ),
@@ -273,7 +274,7 @@ class _MyHomePageState extends State<MyHomePage> {
         ],
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: removeElement,
+        onPressed: removeElementBD,
         child: const Icon(Icons.delete_forever_outlined),
       ),
     );

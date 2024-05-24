@@ -1,3 +1,5 @@
+import 'package:ejercicio_grupal/Model/Empleado.dart';
+
 import 'ElementoEmpresa.dart';
 
 class Departamento extends ElementoEmpresa {
@@ -15,23 +17,27 @@ class Departamento extends ElementoEmpresa {
     elementos = <ElementoEmpresa>[];
     this.usuario = usuario;
 
-    if (superior != null) {
+    if (superior != null && superior is Departamento) {
       DepSuperior = superior;
-      this.dep_superior = idSuperior;
+      this.dep_superior = superior.id;
       DepSuperior?.addElementoEmpresa(this);
     }
   }
 
-  Departamento({this.nombre, this.elementos, this.DepSuperior, this.id, this.usuario, this.dep_superior});
+  Departamento({this.nombre, this.elementos, this.DepSuperior, this.id, this.usuario, this.dep_superior}){
+  }
 
   @override
   void addElementoEmpresa(ElementoEmpresa elemento) {
     ElementoEmpresa? sup = elemento.getSuperior();
+
     if(sup!=null){   //Pertenece a otro departamento, hay que eliminarlo
-      sup.getElementos().remove(elemento);
+      sup.removeElementoEmpresa(elemento);
     }
-    elemento.cambiarSuperior(this);
-    elementos!.add(elemento);
+    if(sup!=this){
+      elemento.cambiarSuperior(this);
+      elementos?.add(elemento);
+    }
   }
 
   @override
@@ -81,7 +87,7 @@ class Departamento extends ElementoEmpresa {
 
   @override
   List<ElementoEmpresa> getElementos() {
-    return elementos!;
+    return elementos ?? [];
   }
 
   @override
@@ -126,6 +132,7 @@ class Departamento extends ElementoEmpresa {
       nombre: json['nombre'] as String?,
       DepSuperior: null,
       usuario: json['usuario'] as String?,
+      dep_superior: json['dep_superior'] as int?
     );
   }
 
@@ -136,5 +143,11 @@ class Departamento extends ElementoEmpresa {
       'nombre': nombre,
       'usuario': usuario
     };
+  }
+
+  @override
+  int? get_superior() {
+    // TODO: implement get_superior
+    return dep_superior;
   }
 }

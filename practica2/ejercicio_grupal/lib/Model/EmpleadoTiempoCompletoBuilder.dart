@@ -1,3 +1,4 @@
+import 'package:ejercicio_grupal/Model/Departamento.dart';
 import 'package:ejercicio_grupal/Model/ElementoEmpresa.dart';
 import 'package:ejercicio_grupal/Model/Empleado.dart';
 import 'package:ejercicio_grupal/Model/EmpleadoBuilder.dart';
@@ -14,10 +15,15 @@ class EmpleadoTiempoCompletoBuilder extends EmpleadoBuilder{
     empleado.setCargo(cargo);
     empleado.setTipoContrato("Tiempo Completo");
     empleado.setUsuario(usuario);
-    if (DepSuperior != null) {
+    if (DepSuperior != null && DepSuperior is Departamento) {
       empleado.DepSuperior = DepSuperior;
       empleado.DepSuperior?.addElementoEmpresa(empleado);
+      empleado.dep_superior = (DepSuperior as Departamento).id;
+    }else{
+      empleado.DepSuperior = null;
+      empleado.dep_superior = null;
     }
+
     return this;
   }
 }
