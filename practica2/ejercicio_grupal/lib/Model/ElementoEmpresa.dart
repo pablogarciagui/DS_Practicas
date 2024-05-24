@@ -1,6 +1,8 @@
 
 abstract class ElementoEmpresa {
 
+
+
   void addElementoEmpresa(ElementoEmpresa elemento);
 
   void removeElementoEmpresa(ElementoEmpresa? elemento);
@@ -25,4 +27,6 @@ abstract class ElementoEmpresa {
   void delete();
 
   int? get_superior();
+
+  int? getId();
 }

@@ -154,4 +154,9 @@ class Empleado extends ElementoEmpresa {
     // TODO: implement get_superior
     return dep_superior;
   }
+
+  @override
+  int? getId() {
+    return id;
+  }
 }

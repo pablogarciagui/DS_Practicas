@@ -44,7 +44,8 @@ class Director {
     asignarElementosSuperiores();
   }
 
-  Future<void> agregar(ElementoEmpresa elementoEmpresa) async {
+  Future<ElementoEmpresa> agregar(ElementoEmpresa elementoEmpresa) async {
+    late ElementoEmpresa elemento;
     if (elementoEmpresa is Departamento) {
       final response = await http.post(
         Uri.parse(apiUrlDep),
@@ -54,7 +55,8 @@ class Director {
         body: jsonEncode((elementoEmpresa as Departamento).toJson()),
       );
       if (response.statusCode == 201) {
-        addElementoEmpresa(Departamento.fromJson(json.decode(response.body)));
+        elemento = Departamento.fromJson(json.decode(response.body));
+        addElementoEmpresa(elemento);
       } else {
         throw Exception('Fallo añadir elementoEmpresa, Dep: ${response.body}');
       }
@@ -72,11 +74,13 @@ class Director {
         body: jsonEncode((elementoEmpresa as Empleado).toJson()),
       );
       if (response.statusCode == 201) {
-        addElementoEmpresa(Empleado.fromJson(json.decode(response.body)));
+        elemento = Empleado.fromJson(json.decode(response.body));
+        addElementoEmpresa(elemento);
       } else {
         throw Exception('Fallo añadir elementoEmpresa, Emp: ${response.body}');
       }
     }
+    return elemento;
   }
 
   void addElementoEmpresa(ElementoEmpresa elemento) {
@@ -103,7 +107,7 @@ class Director {
           elemento.cambiarSuperior(null);
         }
         empresa.add(elemento);
-      } else if (seleccionado is Departamento) {
+      } else{
         // addElementoEmpresa del departamento ya se encarga de cambiarle el superior a él si hiciera falta
         seleccionado?.addElementoEmpresa(elemento);
       }

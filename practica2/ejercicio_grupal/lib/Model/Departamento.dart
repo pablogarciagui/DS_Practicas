@@ -11,7 +11,6 @@ class Departamento extends ElementoEmpresa {
   String? usuario;
   int? dep_superior;
 
-
   Departamento.parametros(String nombre, ElementoEmpresa? superior, String usuario, int? idSuperior) {
     this.nombre = nombre;
     elementos = <ElementoEmpresa>[];
@@ -34,7 +33,7 @@ class Departamento extends ElementoEmpresa {
     if(sup!=null){   //Pertenece a otro departamento, hay que eliminarlo
       sup.removeElementoEmpresa(elemento);
     }
-    if(sup!=this){
+    if(elemento.getId()!=this.id){
       elemento.cambiarSuperior(this);
       elementos?.add(elemento);
     }
@@ -149,5 +148,10 @@ class Departamento extends ElementoEmpresa {
   int? get_superior() {
     // TODO: implement get_superior
     return dep_superior;
+  }
+
+  @override
+  int? getId() {
+    return id;
   }
 }
