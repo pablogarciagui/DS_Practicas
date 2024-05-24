@@ -48,19 +48,26 @@ void main() {
       director.seleccionado = department2;
       departamento = await director.agregar(childDepartment) as Departamento;
 
-      expect(department1.getElementos(), isNot(contains(departamento)));
-      expect(department2.getElementos(), contains(departamento));
-      expect(departamento.getSuperior(), equals(departamento));
+      for(var elemento in department1.getElementos()){
+        expect(elemento.getId(), isNot(departamento.getId()));
+      }
+
+      expect(department2.getElementos().last.getId(), equals(departamento.getId()));
+      expect(departamento.getSuperior()?.getId(), equals(department2.getId()));
     });
+
     test('Añadir Empleado perteneciente a un Departamento a otro', () async {
       director.seleccionado = department1;
-      await director.agregar(employee);
+      Empleado empleado = await director.agregar(employee) as Empleado;
       director.seleccionado = department2;
-      await director.agregar(employee);
+      empleado = await director.agregar(employee) as Empleado;
 
-      expect(department1.getElementos(), isNot(contains(employee)));
-      expect(department2.getElementos(), contains(employee));
-      expect(employee.getSuperior(), equals(department2));
+      for(var elemento in department1.getElementos()){
+        expect(elemento.getId(), isNot(empleado.getId()));
+      }
+
+      expect(department2.getElementos().last.getId(), equals(empleado.getId()));
+      expect(empleado.getSuperior()?.getId(), equals(department2.getId()));
     });
 
     test('Añadir Departamento a Empleado', () async {
@@ -71,14 +78,17 @@ void main() {
 
     test('Añadir Empleado a Departamento', () async {
       director.seleccionado = department1;
-      await director.agregar(employee);
-      expect(department1.getElementos(), contains(employee));
-      expect(employee.getSuperior(), equals(department1));
+      Empleado empleado = await director.agregar(employee) as Empleado;
+
+      expect(department1.getElementos().last.getId(), equals(empleado.getId()));
+      expect(employee.getSuperior()?.getId(), equals(department1.getId()));
     });
 
     test('Añadir Departamento a sí mismo', () async {
-      director.seleccionado = department1;
-      expect(() async => await director.agregar(department1),
+      Departamento departamento = await director.agregar(department1) as Departamento;
+      director.seleccionado = departamento;
+
+      expect(() async => await director.agregar(departamento),
           throwsUnimplementedError);
     });
   });
