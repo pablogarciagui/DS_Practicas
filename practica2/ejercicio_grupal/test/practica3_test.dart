@@ -85,10 +85,9 @@ void main() {
     });
 
     test('Añadir Departamento a sí mismo', () async {
-      Departamento departamento = await director.agregar(department1) as Departamento;
-      director.seleccionado = departamento;
+      director.seleccionado = department1;
 
-      expect(() async => await director.agregar(departamento),
+      expect(() => director.addElementoEmpresa(department1),
           throwsUnimplementedError);
     });
   });
@@ -100,6 +99,8 @@ void main() {
     late Empleado empleado1;
     late Empleado empleado2;
     late Empleado empleado3;
+    late Empleado e1, e2, e3;
+    late Departamento dA, dB;
 
     setUp(() async{
       director = Director(EmpleadoTiempoCompletoBuilder(null));
@@ -112,15 +113,15 @@ void main() {
       empleado3 =
           Empleado.parametros('3', '000000000A', 'Empleado', 'Tiempo Completo', null,"usuario");
 
-      await director.agregar(departmentoA);
-      await director.agregar(empleado3);
+      dA = await director.agregar(departmentoA) as Departamento;
+      e3 = await director.agregar(empleado3) as Empleado;
 
-      director.setElementoSeleccionado(departmentoA);
-      await director.agregar(departmentoB);
-      await director.agregar(empleado1);
+      director.setElementoSeleccionado(dA);
+      dB = await director.agregar(departmentoB) as Departamento;
+      e1 = await director.agregar(empleado1) as Empleado;
 
-      director.setElementoSeleccionado(departmentoB);
-      await director.agregar(empleado2);
+      director.setElementoSeleccionado(dB);
+      e2 = await director.agregar(empleado2) as Empleado;
       // await director.agregar(null);
       /*
       Estructura de la empresa
@@ -147,27 +148,27 @@ void main() {
     });
 
     test('Añadir empleado fuera de departamento', () async {
+      director.setElementoSeleccionado(null);
       Empleado empleadoAux = Empleado.parametros('Aux', '000000000A', 'Posicion', "Tiempo Completo", null,"usuario");
-      await director.agregar(empleadoAux);
-      expect(director.getEmpresa(), contains(empleadoAux));
-      expect(director.getEmpresa().last.toString(), 'Aux');
+      Empleado empleado = await director.agregar(empleadoAux) as Empleado;
+      expect(director.getEmpresa().last.getId(), equals(empleado.getId()));
     });
 
     test('Eliminar elemento', () async {
-      director.setElementoSeleccionado(empleado1);
+      director.setElementoSeleccionado(e1);
       await director.eliminar();
-      expect(director.getEmpresa(), isNot(contains(empleado1)));
+      expect(director.getEmpresa(), isNot(contains(e1)));
 
-      director.setElementoSeleccionado(departmentoA);
+      director.setElementoSeleccionado(dA);
       await director.eliminar();
-      expect(director.getEmpresa(), isNot(contains(departmentoA)));
+      expect(director.getEmpresa(), isNot(contains(dA)));
     });
 
     test('Eliminar bloque completo', () async {
-      director.setElementoSeleccionado(departmentoA);
+      director.setElementoSeleccionado(dA);
       await director.eliminar();
 
-      expect(director.getEmpresa(), isNot(contains(departmentoA)));
+      expect(director.getEmpresa(), isNot(contains(dA)));
     });
 
     test('Eliminar con nada seleccionado', () async {
@@ -184,14 +185,14 @@ void main() {
     });
 
     test('Eliminar bloque elimina bien lo de dentro', () async {
-      director.setElementoSeleccionado(departmentoA);
+      director.setElementoSeleccionado(dA);
       await director.eliminar();
 
-      expect(director.getEmpresa(), isNot(contains(departmentoA)));
-      expect(departmentoA.getElementos().length, 0);
-      expect(departmentoB.getElementos().length, 0);
-      expect(empleado1.getSuperior(), null);
-      expect(empleado2.getSuperior(), null);
+      expect(director.getEmpresa(), isNot(contains(dA)));
+      expect(dA.getElementos().length, 0);
+      expect(dB.getElementos().length, 0);
+      expect(e1.getSuperior(), null);
+      expect(e2.getSuperior(), null);
     });
   });
 }

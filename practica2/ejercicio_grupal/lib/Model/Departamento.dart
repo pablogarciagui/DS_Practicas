@@ -33,7 +33,7 @@ class Departamento extends ElementoEmpresa {
     if(sup!=null){   //Pertenece a otro departamento, hay que eliminarlo
       sup.removeElementoEmpresa(elemento);
     }
-    if(elemento.getId()!=this.id){
+    if(sup!=this){
       elemento.cambiarSuperior(this);
       elementos?.add(elemento);
     }
